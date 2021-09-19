@@ -1,0 +1,88 @@
+<style>
+    .maincol {
+        display: flex;
+        justify-content: space-evenly;
+        background: aliceblue;
+        margin: 65px;
+        box-shadow: 0px 1px 3px 0px rgb(0 0 0 / 20%);
+    }
+
+    .address,
+    .gmaps {
+        margin: 20px;
+    }
+</style>
+<%- include("./_header.ejs") -%>
+
+    <img src="/public/home/image/about-inner-banner.jpg" style="width: 100%;
+      height: auto;">
+
+    <!-- Start mainContent -->
+    <div id="mainContent">
+        <div class="maincol">
+            <address class="address">
+                <strong class="padB10">Member Secretary,</strong>
+                <br>
+                <br>
+                National Board of Accreditation,
+                <br>
+                NBCC Place, East Tower, 4th floor
+                <br>
+                Bhisham Pitamah Marg
+                <br>
+                Pragati Vihar,<br>
+                New Delhi 110003, INDIA
+                <br>
+                <br>
+                For General Query
+                <br>
+
+
+                <strong class="tele sprite">Tel:</strong> +91-11-4015 9583
+                <br>
+                <strong class="tele sprite">Tel:</strong> +91-11-2436 0653
+                <br>
+                <strong class="tele sprite">Tel:</strong> +91-11-4015 9587
+                <br>
+                <strong class="tele sprite">Tel:</strong> +91-11-4015 9589
+                <br>
+                <!--<strong class="fax sprite">Fax:</strong> +91-11-2436 0682
+                                 <br> -->
+
+                <strong class="mail sprite">E-mail:</strong> <a
+                    href="mailto:membersecretary@nbaind.org">membersecretary@nbaind.org</a>
+                <br>
+                <strong class="mail sprite">E-mail:</strong> <a
+                    href="mailto:helpdesk@nirfindia.org">helpdesk@nirfindia.org</a>
+                <br>
+                (Monday to Friday-9:00 am to 5:30pm)
+                <br>
+                <br>
+                For Technical Query
+                <br>
+                <strong class="tele sprite">Tel:</strong> +91-79-2326 8289
+                <br>
+                <strong class="tele sprite">Tel:</strong> +91-79-2326 8247
+
+                <br>
+                <strong class="mail sprite">E-mail:</strong> <a
+                    href="mailto:techsupport@nirfindia.org">techsupport@nirfindia.org</a>
+                <br>
+                (Monday to Friday-9:30 am to 6:00pm)
+                <br>
+                <br>
+                <br>
+            </address>
+            <div class="gmaps">
+                <iframe style="box-shadow: 0px 1px 3px 0px rgb(0 0 0 / 20%);"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14013.714986931463!2d77.2299912!3d28.5869119!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe28da4bdb95840c!2sNational%20Board%20of%20Accreditation!5e0!3m2!1sen!2sin!4v1631985560713!5m2!1sen!2sin"
+                    width="900" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+    </div>
+    <!-- End leftContent -->
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <%- include("./_footer.ejs") -%>
