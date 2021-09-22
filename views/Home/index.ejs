@@ -1,105 +1,92 @@
+<link rel="stylesheet" href="/public/css/index.css">
+
 <%- include("./_header.ejs") -%>
-<div class="container-fluid main_content text-center">
-    <div class="row">
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-            <div class="carousel-inner" style="height:400px;">
-                <div class="carousel-item active">
-                    <img src="https://www.w3schools.com/bootstrap/chicago.jpg" class="w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://www.w3schools.com/bootstrap/la.jpg" class="w-100" alt="...">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="http://www.knit.ac.in/site/writereaddata/HomePage/Header/H_202006231143478151.jpg" class="w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="http://www.knit.ac.in/site/writereaddata/HomePage/Header/H_202006231146146680.jpg" class="w-100" alt="...">
+      </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
 </div>
-<div class="container main_content text-center">
-    <div class="row">
-        <h1>UP Rankings 2021: Result</h1>
+
+<div class="container main_content text-center mb-5">
+    <div class="row mt-5">
+        <h2 style="color: #01508D;">UP Rankings 2021: Result</h2>
     </div>
-    <div class="row">
-        <p>India Rankings 2021 Released on 9th September 2021 by Hon'ble Minister of Education Shri Dharmendra Pradhan.</p>
+    <div class="row mt-2">
+        <p class="">India Rankings 2021 Released on 9th September 2021 by Hon'ble Minister of Education Shri Dharmendra Pradhan.</p>
     </div>
-    <div class="row">
-        <p>Youtube || Facebook || Twitter</p>  
-    </div>
-    <div class="row">
-        <div class="row">
-            <h2>About UPIRF</h2>
-        </div>
-        <div class="row">
-            <p>The National Institutional Ranking Framework (NIRF) has been accepted by the MoE and launched by Honourable Minister for Education on 29th September 2015. This framework outlines a methodology to rank institutions across the country</p>
-        </div>
-        <div class="">
-            <button type="button" class="btn btn-info">Info</button>
-        </div>    
+    <div class="row mt-2 mb-2">
+        <div class="col-md-12">
+            <ul class="social-network social-circle">
+              <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" class="icoYoutube" title="Youtube"><i class="fa fa-youtube"></i></a></li>
+            </ul>
+        </div>  
     </div>
     <hr>
     <div class="row">
         <div class="row">
-            <h2>Parameters</h2>
+            <h3 style="color: #01508D;">About SIRF</h3>
+        </div>
+        <div class="row mt-2">
+            <p>The National Institutional Ranking Framework (NIRF) has been accepted by the MoE and launched by Honourable Minister for Education on 29th September 2015. This framework outlines a methodology to rank institutions across the country.</p>
+        </div>
+        <div class="">
+           <a href="/about"><button type="button" class="btn" style="background-color:#01508D; color: white;">More Info</button></a>
+        </div>    
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row mb-3">
+            <h3 style="color: #01508D">Parameters</h3>
         </div>
         <div class="row">
-            <div class="col-md-2">
-                <div class="card mb-3">
-                    <img class="card-img-top p-5" src="https://img.icons8.com/ios/100/000000/classroom.png"/>
+            <div class="card-group">
+                <div class="card mb-3 border-0 text-center">
+                    <img class="" src="/public/home/image/1.JPG" alt=""> 
                     <div class="card-body">
-                      <h5 class="card-title">Teaching Learning & Resources</h5>
+                      <h5 class="card-title mb-4" style="color:#01508D;">Teaching Learning & Resources</h5>
                       <p class="card-text">These parameters are related to the core activities of any place of learning...</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card mb-3">
-                    <img class="card-img-top p-5" src="https://img.icons8.com/ios/100/000000/classroom.png"/>
+                <div class="card mb-3 border-0 text-center">
+                    <img class="" src="/public/home/image/2.JPG" alt=""> 
                     <div class="card-body">
-                      <h5 class="card-title">Teaching Learning & Resources</h5>
-                      <p class="card-text">These parameters are related to the core activities of any place of learning...</p>
+                      <h5 class="card-title mb-4" style="color:#01508D;">Research and Professional Practice</h5>
+                      <p class="card-text">Excellence in teaching and learning is closely associated with the scholarship...</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card mb-3">
-                    <img class="card-img-top p-5" src="https://img.icons8.com/ios/100/000000/classroom.png"/>
+                <div class="card mb-3 border-0 text-center">
+                    <img class="" src="/public/home/image/3.JPG" alt=""> 
                     <div class="card-body">
-                      <h5 class="card-title">Teaching Learning & Resources</h5>
-                      <p class="card-text">These parameters are related to the core activities of any place of learning...</p>
+                      <h5 class="card-title mb-4" style="color:#01508D;">Graduation Outcome</h5>
+                      <p class="card-text">This parameter forms the ultimate test of the effectiveness of the core teaching/learning...</p>
+                    </div>
+                </div><div class="card mb-3 border-0 text-center">
+                    <img class="" src="/public/home/image/4.JPG" alt=""> 
+                    <div class="card-body">
+                      <h5 class="card-title mb-4" style="color:#01508D;">Outreach & Inclusivity</h5>
+                      <p class="card-text">The Ranking framework lays special emphasis on representation of women...</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card mb-3">
-                    <img class="card-img-top p-5" src="https://img.icons8.com/ios/100/000000/classroom.png"/>
+                <div class="card mb-3 border-0 text-center">
+                    <img class="" src="/public/home/image/5.JPG" alt=""> 
                     <div class="card-body">
-                      <h5 class="card-title">Teaching Learning & Resources</h5>
-                      <p class="card-text">These parameters are related to the core activities of any place of learning...</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card mb-3">
-                    <img class="card-img-top p-5" src="https://img.icons8.com/ios/100/000000/classroom.png"/>
-                    <div class="card-body">
-                      <h5 class="card-title">Teaching Learning & Resources</h5>
-                      <p class="card-text">These parameters are related to the core activities of any place of learning...</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card mb-3">
-                    <img class="card-img-top p-5" src="https://img.icons8.com/ios/100/000000/classroom.png"/>
-                    <div class="card-body">
-                      <h5 class="card-title">Teaching Learning & Resources</h5>
-                      <p class="card-text">These parameters are related to the core activities of any place of learning...</p>
+                      <h5 class="card-title mb-4" style="color:#01508D;">Perception</h5>
+                      <p class="card-text">The ranking methodology gives a significant importance to the perception of the institution...</p>
                     </div>
                 </div>
             </div>

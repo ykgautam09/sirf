@@ -1,0 +1,10 @@
+#primarymenu{
+    background: #92a531;
+    padding: 0% 10%;
+}
+
+#primarymenu li a{
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
