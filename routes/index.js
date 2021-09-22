@@ -40,4 +40,14 @@ router.get('/contact',function (req,res) {
     res.render("Home/contact");
 });
 
+// document page
+router.get('/document',function (req,res) {
+    res.render("Home/document");
+});
+
+// advertisement page
+router.get('/advertisement',function (req,res) {
+    res.render("Home/advertisement");
+});
+
 module.exports = router;

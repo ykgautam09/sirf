@@ -1,0 +1,16 @@
+#documents li{
+    text-decoration: none;
+    border-radius: 10px;
+    padding:10px 20px;
+    background-color: #F1F1F1;
+    margin-bottom: 10px;
+}
+
+#documents li:hover{
+    border:grey solid 0.1px;
+}
+
+#documents li a{
+    color: black;
+    text-decoration: none;
+}
