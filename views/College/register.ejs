@@ -1,0 +1,42 @@
+<%- include("./_header.ejs") -%>
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-3">
+            <div class="card p-2">
+            <form>
+                <div class="mb-3">
+                    <label for="aktuId" class="form-label">AKTU ID</label>
+                    <input type="text" class="form-control" id="aktuId">
+                </div>
+                <div class="mb-3">
+                    <label for="collegeName" class="form-label">College Name</label>
+                    <input type="text" class="form-control" id="collegeName">
+                </div>
+                <div class="mb-3">
+                    <label for="collegeName" class="form-label">College Name</label>
+                    <input type="text" class="form-control" id="collegeName">
+                </div>
+                <select class="form-select mb-3" aria-label="Default select example">
+                    <option selected>Select the Type</option>
+                    <option value="1">Government</option>
+                    <option value="2">Private</option>
+                    <option value="3">Semi-Government</option>
+                  </select>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+<%- include("./_footer.ejs") -%>
