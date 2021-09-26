@@ -14,6 +14,10 @@ router.get('/', function (req, res) {
 router.get('/about', function (req, res) {
     res.render("Home/about");
 });
+// faq page
+router.get('/faq', function (req, res) {
+    res.render("Home/faq");
+});
 
 // parameter  page
 router.get('/parameter', function (req, res) {
