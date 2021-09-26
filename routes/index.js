@@ -58,5 +58,8 @@ router.get('/college/login', function (req, res) {
 router.get('/college/register', function (req, res) {
     res.render("College/register");
 });
+router.get('/college/dashboard', function (req, res) {
+    res.render("College/dashboard");
+});
 
 module.exports = router;
