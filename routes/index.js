@@ -49,17 +49,6 @@ router.get('/advertisement', function (req, res) {
     res.render("Home/advertisement");
 });
 
-// college login
-router.get('/college/login', function (req, res) {
-    res.render("College/login");
-});
 
-// college register
-router.get('/college/register', function (req, res) {
-    res.render("College/register");
-});
-router.get('/college/dashboard', function (req, res) {
-    res.render("College/dashboard");
-});
 
 module.exports = router;
