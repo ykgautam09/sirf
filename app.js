@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const logger = require('morgan');
 const indexRoute = require('./routes/index')
+const collegeRoute = require('./routes/college')
+
 
 
 // configurations
@@ -20,6 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Routes
 app.use('/', indexRoute);
+app.use('/college', collegeRoute);
 
 
 
