@@ -51,7 +51,7 @@ span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #f0f1ae;
+    background: #c2c47c;
     color: rgb(0, 0, 0);
     transition: all 0.3s;
 }
@@ -103,7 +103,7 @@ span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #f0f1ae;
+    background: #c2c47c;
 }
 
 #sidebar .sidebar-header strong {
@@ -129,7 +129,7 @@ span {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: #283fa3;
 }
 
 a[data-toggle="collapse"] {
