@@ -1,5 +1,5 @@
 #primarymenu{
-    background: #92a531;
+    background: #0A6CB5;
     padding: 0% 10%;
 }
 
@@ -18,4 +18,8 @@
     color: black;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+#primarymenu .fa-bars{
+    color: white;
 }
