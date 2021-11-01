@@ -19,7 +19,7 @@ router.get('/register', function (req, res) {
 });
 
 // accept user data from register page
-router.post('/register', uplaod.single('collegeCertificate'), async function (req, res) {
+router.post('/register', uplaod.single('collegeCertificate'), function (req, res) {
     let userData = {
         aktu_id: req.body.aktuId,
         name: req.body.collegeName,
@@ -31,30 +31,31 @@ router.post('/register', uplaod.single('collegeCertificate'), async function (re
     // save user data in database
     db.connection.query("INSERT INTO `institute` SET ?", userData, (err, user) => {
         if (err) throw err;
-        console.log(user, '----------');
-    })
-    // generate otp and save into database
-    let otp = cred.genOtp();
-    db.connection.query("INSERT INTO `otp` SET ?", { otp, user_id: user.insertId }, err => {
-        if (err) throw err;
-        let html = await ejs.renderFile(path.join(__dirname, '../', 'views/Mail/registration.ejs'), { otp, email: userData.email });
+        console.log(user,);
 
-        // send user email for verification
-        let mailOption = {
-            subject: "Verify your UPIRF account",
-            to: userData.email,
-            from: process.env.MAILING_ID,
-            html
-        }
-        mail.sendMail(mailOption)
-        .catch(err => {
-            console.log(err);
-            return res.send("something gone wrong");
-        })
-        .then(() => {
-            console.log(userData);
-            return res.render("College/verification");
+        // generate otp and save into database
+        let otp = cred.genOtp();
+        db.connection.query("INSERT INTO `otp` SET ?", { otp, user_id: user.insertId }, async (err) => {
+            if (err) throw err;
+            let html = await ejs.renderFile(path.join(__dirname, '../', 'views/Mail/registration.ejs'), { otp, email: userData.email });
 
+            // send user email for verification
+            let mailOption = {
+                subject: "Verify your UPIRF account",
+                to: userData.email,
+                from: process.env.MAILING_ID,
+                html
+            }
+            mail.sendMail(mailOption)
+                .catch(err => {
+                    console.log(err);
+                    return res.send("something gone wrong");
+                })
+                .then(() => {
+                    console.log(userData);
+                    return res.render("College/verification"); // template required
+
+                })
         })
     });
 });
