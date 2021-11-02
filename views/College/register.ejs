@@ -1,51 +1,54 @@
 <%- include("./_header.ejs") -%>
 
-<div class="container mt-5">
-    <div class="row justify-content-center mt-5 mb-5">
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                   Register as a College
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="aktuId" class="form-label">AKTU ID</label>
-                            <input type="text" class="form-control" id="aktuId">
-                        </div>
-                        <div class="mb-3">
-                            <label for="collegeName" class="form-label">College Name</label>
-                            <input type="text" class="form-control" id="collegeName">
-                        </div>
-                        <div class="mb-3">
-                            <label for="collegeName" class="form-label">College Name</label>
-                            <input type="text" class="form-control" id="collegeName">
-                        </div>
-                        <select class="form-select mb-3" aria-label="Default select example">
-                            <option selected>Select the Type</option>
-                            <option value="1">Government</option>
-                            <option value="2">Private</option>
-                            <option value="3">Semi-Government</option>
-                          </select>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password">
-                        </div>
-                        <button type="submit" class="btn" style="background-color: #0A6CB5; color: #ffffff;">Register</button>
-                    </form>
-                    <br>
-                    <h6>Already Registered? <a href="login" style="text-decoration: none;">Login</a></h6>
-                </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        Register as a College
+                    </div>
+                    <div class="card-body">
+                        <form action="/college/register" enctype="multipart/form-data" method="post">
+                            <div class="mb-3">
+                                <label for="aktuId" class="form-label">AKTU ID</label>
+                                <input type="text" name="aktuId" class="form-control" id="aktuId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="collegeEmail" class="form-label">Email address</label>
+                                <input type="email" name="collegeEmail" class="form-control" id="email"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="collegeName" class="form-label">College Name</label>
+                                <input type="text" name="collegeName" class="form-control" id="collegeName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="collegeType" class="form-label">College Type</label>
+                                <select id="collegeType" name="collegeType" class="form-select mb-3"
+                                    aria-label="Default select example">
+                                    <option selected>Select the Type</option>
+                                    <option value="1">Government</option>
+                                    <option value="2">Private</option>
+                                    <option value="3">Semi-Government</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="collegeCertificate" class="form-label">College Certificate</label>
+                                <input type="file" name="collegeCertificate" class="form-control"
+                                    id="collegeCertificate">
+                            </div>
+                            <button type="submit" class="btn"
+                                style="background-color: #0A6CB5; color: #ffffff;">Register</button>
+                        </form>
+                        <br>
+                        <h6>Already Registered? <a href="login" style="text-decoration: none;">Login</a></h6>
+                    </div>
 
+                </div>
             </div>
-        </div>
-        
-    </div>
-    
-</div>
 
-<%- include("./_footer.ejs") -%>
+        </div>
+
+    </div>
+
+    <%- include("./_footer.ejs") -%>
