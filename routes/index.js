@@ -49,6 +49,11 @@ router.get('/advertisement', function (req, res) {
     res.render("Home/advertisement");
 });
 
+// error page
+router.get('/error', function (req, res) {
+    res.render("Home/error");
+});
+
 
 
 module.exports = router;
