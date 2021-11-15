@@ -1,0 +1,57 @@
+<%- include("./_header.ejs") -%>
+
+    <style>
+        .side-cards {
+            height: 200px;
+            margin-bottom: 41px;
+        }
+
+        .card-header {
+            background-color: #0a6cb5;
+            color: white;
+            font-weight: bold;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .data-list {
+            height: 200px;
+            width: 390px;
+            overflow-y: hidden;
+        }
+    </style>
+    <div class="container mt-5">
+
+
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        Enter OTP
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Enter OTP received on your registered Email address</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                                <small>New password will be sent to your registered email</small>
+                            </div>
+                            <button type="submit" class="btn"
+                                style="background-color: #0A6CB5; color: #ffffff;">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("./_footer.ejs") -%>
