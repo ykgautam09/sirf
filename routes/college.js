@@ -13,6 +13,16 @@ router.get('/login', function (req, res) {
     res.render("College/login");
 });
 
+// college forgot Password
+router.get('/forgot-password', function (req, res) {
+    res.render("College/forgot_password");
+});
+
+// college enter OTP
+router.get('/enter-otp', function (req, res) {
+    res.render("College/enter_otp");
+});
+
 // college register
 router.get('/register', function (req, res) {
     res.render("College/register");
