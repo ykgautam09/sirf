@@ -70,6 +70,21 @@ router.post('/register', uplaod.single('collegeCertificate'), function (req, res
     });
 });
 
+router.post('/login', async function (req, res) {
+    let userId = req.body.userEmail;
+    let password = req.body.password;
+    let hashPass = cred.genHash(password)
+
+    await db.connection.promise().query("SELECT `password` FROM `institute` WHERE `user_id`=? LIMIT BY 1", userId, (err, result) => {
+        if (err)
+            console.log(err);
+
+        if (result[0].password == hashPass)
+            return res.render("College/dashboard");
+    })
+    return res.render("College/login");
+});
+
 // dashboard
 router.get('/dashboard', function (req, res) {
     res.render("College/dashboard");
