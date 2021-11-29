@@ -10,12 +10,12 @@ function genUserID() {
 
 // generate password for college 
 function genPassword() {
-    return cryptoRandomString({ length: 12, type: 'ascii-printable' });
+    return cryptoRandomString({ length: 12 });
 }
 
-// generate otp for email verification 
+// generate otp for verification link
 function genOtp() {
-    return cryptoRandomString({ length: 6 });
+    return cryptoRandomString({ length: 15 });
 }
 
 // generate hash with password
