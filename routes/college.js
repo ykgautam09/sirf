@@ -1,5 +1,4 @@
 const express = require('express');
-const multer = require('multer');
 const ejs = require('ejs');
 const mail = require('../modules/mail');
 const router = express.Router();
@@ -7,7 +6,6 @@ const db = require('./../modules/dbConnection');
 const uplaod = require('./../modules/upload')
 const cred = require('./../modules/credential');
 const path = require('path');
-const { log } = require('console');
 
 // college login
 router.get('/login', function (req, res) {
@@ -31,6 +29,7 @@ router.get('/register', function (req, res) {
 
 // accept user data from register page
 router.post('/register', uplaod.single('collegeCertificate'), function (req, res) {
+
     let userData = {
         aktu_id: req.body.aktuId,
         name: req.body.collegeName,
@@ -38,114 +37,163 @@ router.post('/register', uplaod.single('collegeCertificate'), function (req, res
         type: req.body.collegeType,
         certificate: req.file.filename,
     };
+
     db.connection.promise().query("SELECT id FROM `institute` WHERE email=?;", userData.email)
         .then(data => {
             // user email already exists
             if (data[0].length) {
                 console.log(`user ${userData.email} already in database::`);
-                return res.send('user already exists')
+                return res.send('user already exists');
             }
 
             // save user data in database
             db.connection.promise().query("INSERT INTO `institute` SET ?;", userData)
+                // generate otp and save into database
                 .then(user => {
-                    console.log('user inserted in registration table', userData.email, '//', user);
-                    // generate otp and save into database
+
+                    console.log('user inserted in registration table', userData.email);
                     let otp = cred.genOtp();
-                    let verificationLink = `${req.protocol}://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/college/verify/${userData.email}/?code=${otp}`
+                    // generate verification link
+                    let verificationLink = `${req.protocol}://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/college/verify/${userData.email}/?code=${otp}`;
 
                     // save otp in otp table
                     db.connection.promise().query("INSERT INTO `otp` SET ?", { otp, user_id: user[0].insertId })
-                        .then(async () => {
-                            console.log('otp inserted in otp table for user', userData.email)
+                        .then(() => {
 
-                            // read mailing template for registration
-                            let html = await ejs.renderFile(path.join(__dirname, '..', 'views', 'Mail', 'registration.ejs'), { verificationLink, email: userData.email });
+                            console.log('otp inserted in otp table for user', userData.email);
+                            // read mailing template for verification after registration
+                            ejs.renderFile(path.join(__dirname, '..', 'views', 'Mail', 'registration.ejs'), { verificationLink, email: userData.email })
+                                .then((data) => {
 
-                            // send user email for verification
-                            let mailOption = {
-                                subject: "Verify your UPIRF account",
-                                to: userData.email,
-                                from: process.env.MAILING_ID,
-                                html
-                            }
-                            mail.sendMail(mailOption)
-                                .then(() => {
-                                    console.log('verification mail sent to :', mailOption.to);
-                                    return res.render("College/verification"); // template required
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                    return res.send("something gone wrong");
-                                })
+                                    // send user email for verification
+                                    let mailOption = {
+                                        subject: "Verify your UPIRF account",
+                                        to: userData.email,
+                                        from: process.env.MAILING_ID,
+                                        html: data
+                                    };
 
-                        })
-
-                })
-
-        }).catch(err => console.log('an error occured', err))
+                                    mail.sendMail(mailOption)
+                                        .then(() => {
+                                            console.log('verification mail sent to :', mailOption.to);
+                                            return res.render("College/login");
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                            return res.send("something gone wrong");
+                                        });
+                                });
+                        });
+                });
+        })
+        .catch(err => console.log('an error occured', err));
 });
 
 router.get('/verify/:email', async function (req, res) {
     let email = req.params.email;
     let pass = req.query.code;
     let durationAllowed = 5;  // link expires after 5 min
+
+    // read otp created less than 5 min ago
     db.connection.promise().query(`select otp from otp where user_id=(select id from institute where email=? LIMIT  1) and time > now() - INTERVAL ${durationAllowed} MINUTE ORDER BY id DESC LIMIT 1;`, email)
         .then((result) => {
 
-            if (result[0][0].otp == pass)
-                console.log('account verified succefully')
+            let otp = result[0][0].otp;
+            if (otp == pass) {
+                console.log('account verified succefully');
+                // asynchrounously delete stored otp once used Succefully
+                db.connection.promise().query('DELETE FROM otp WHERE user_id=(SELECT id FROM institute WHERE email=? LIMIT 1) and otp=?;', [email, otp]).then(() => console.log('current otp removed from database for :', email));
+            }
         })
         // generate user password after user verification
         .then(() => {
+
             let password = cred.genPassword();
             let passHash = cred.genHash(password);
 
             // acount verified and set password to set acount active
             db.connection.promise().query('UPDATE institute SET password=? WHERE email=?;', [passHash, email]).then(() => {
-                console.log('account verified succefully proceed to login')
-            }).then(async () => {
-                // read mailing template to send credentials back to user
-                let html = await ejs.renderFile(path.join(__dirname, '..', 'views', 'Mail', 'credential.ejs'), { email, pass: password });
+                console.log('account verified succefully proceed to login');
+            }).then(() => {
 
-                // send user email with credentials
-                let mailOption = {
-                    subject: "Account Activated Succefully",
-                    to: email,
-                    from: process.env.MAILING_ID,
-                    html
-                }
-                mail.sendMail(mailOption)
-                    .then(() => {
-                        console.log('credentials sent to :', email);
-                        return res.redirect("/college/login"); // template required
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        return res.send("something gone wrong");
-                    })
+                // read mailing template to send credentials back to user
+                ejs.renderFile(path.join(__dirname, '..', 'views', 'Mail', 'credential.ejs'), { email, pass: password })
+                    .then((content) => {
+
+                        // send user email with credentials
+                        let mailOption = {
+                            subject: "Account Activated Succefully",
+                            to: email,
+                            from: process.env.MAILING_ID,
+                            html: content
+                        };
+
+                        mail.sendMail(mailOption)
+                            .then(() => {
+                                console.log('credentials sent to :', email);
+                                return res.redirect("/college/login"); // template required
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                return res.send("something gone wrong");
+                            });
+                    });
+
             })
+                .catch(() => {
+                    console.log('password couldn\'t be set in database')
+                    res.render('Error/500')
+                });
         })
         .catch(err => {
-            console.log('something goes wrong', err)
+            console.log('link doesn\'t matched with database', err);
+            res.send('Either link is already used or it is expired');
+        });
+});
 
-            res.render('view/error');
-        })
-})
-
-router.post('/login', async function (req, res) {
-    let userId = req.body.userEmail;
+router.post('/login', function (req, res) {
+    let email = req.body.userEmail;
     let password = req.body.password;
-    let hashPass = cred.genHash(password)
 
-    await db.connection.promise().query("SELECT `password` FROM `institute` WHERE `user_id`=? LIMIT BY 1", userId, (err, result) => {
-        if (err)
-            console.log(err);
+    db.connection.promise().query("SELECT `password` FROM `institute` WHERE `email`=? LIMIT 1", email)
+        .then(async result => {
 
-        if (result[0].password == hashPass)
-            return res.render("College/dashboard");
-    })
-    return res.render("College/login");
+            let hash = result[0][0].password;
+            if (cred.compareHash(password, hash)) {
+                console.log('login successfull');
+
+                // read mailing template to send login notification
+                ejs.renderFile(path.join(__dirname, '..', 'views', 'Mail', 'login.ejs'), { email, pass: password })
+                    .then((content) => {
+
+                        // send user email with login details
+                        let mailOption = {
+                            subject: "Login successfull",
+                            to: email,
+                            from: process.env.MAILING_ID,
+                            html: content
+                        }
+
+                        mail.sendMail(mailOption)
+                            .then(() => console.log('login mail sent to :', email))
+                            .catch(err => {
+                                console.log(err);
+                                return res.send("something gone wrong Mail couldn\'t be sent");
+                            });
+                    });
+
+                // send user to dashboard even if login notification wasn't sent to mail
+                return res.render("College/dashboard");
+            }
+            else {
+                console.log('password doesn\'t match');
+                res.render('College/login');
+            }
+        })
+        .catch(err => {
+            console.log('something goes wrong', err);
+            res.render('College/login')
+        });
 });
 
 
