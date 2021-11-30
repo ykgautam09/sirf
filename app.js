@@ -29,7 +29,7 @@ app.use('/college', collegeRoute);
 // Server Set-up
 app.listen(process.env.SERVER_PORT || '5000', (err) => {
     if (err) console.log(err);
-    console.log(`Server Up and Running at ${host}:${port}/`);
+    console.log(`Server Up and Running at http://${host}:${port}/`);
 });
 
 module.exports = app;
