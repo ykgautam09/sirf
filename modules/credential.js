@@ -23,6 +23,11 @@ function genHash(pass) {
     return bcrypt.hashSync(pass, 10)
 }
 
+// check password with hash
+function compareHash(pass, hash) {
+    return bcrypt.compareSync(pass, hash);
+}
+
 // validate hash with password
 function checkPassword(hash, pass) {
     return bcrypt.compareSync(pass, hash)
@@ -33,5 +38,6 @@ module.exports = {
     genPassword,
     genOtp,
     genHash,
+    compareHash,
     checkPassword
 }
