@@ -3,7 +3,7 @@ const ejs = require('ejs');
 const mail = require('../modules/mail');
 const router = express.Router();
 const db = require('./../modules/dbConnection');
-const uplaod = require('./../modules/upload')
+const upload = require('./../modules/upload')
 const cred = require('./../modules/credential');
 const path = require('path');
 
@@ -28,7 +28,7 @@ router.get('/register', function (req, res) {
 });
 
 // accept user data from register page
-router.post('/register', uplaod.single('collegeCertificate'), function (req, res) {
+router.post('/register', upload.single('collegeCertificate'), function (req, res) {
 
     let userData = {
         aktu_id: req.body.aktuId,
@@ -86,7 +86,7 @@ router.post('/register', uplaod.single('collegeCertificate'), function (req, res
                         });
                 });
         })
-        .catch(err => console.log('an error occured', err));
+        .catch(err => console.log('an error occurred', err));
 });
 
 router.get('/verify/:email', async function (req, res) {
@@ -100,8 +100,8 @@ router.get('/verify/:email', async function (req, res) {
 
             let otp = result[0][0].otp;
             if (otp == pass) {
-                console.log('account verified succefully');
-                // asynchrounously delete stored otp once used Succefully
+                console.log('account verified successfully');
+                // asynchronously delete stored otp once used Successfully
                 db.connection.promise().query('DELETE FROM otp WHERE user_id=(SELECT id FROM institute WHERE email=? LIMIT 1) and otp=?;', [email, otp]).then(() => console.log('current otp removed from database for :', email));
             }
         })
@@ -111,9 +111,9 @@ router.get('/verify/:email', async function (req, res) {
             let password = cred.genPassword();
             let passHash = cred.genHash(password);
 
-            // acount verified and set password to set acount active
+            // account verified and set password to set account active
             db.connection.promise().query('UPDATE institute SET password=? WHERE email=?;', [passHash, email]).then(() => {
-                console.log('account verified succefully proceed to login');
+                console.log('account verified successfully proceed to login');
             }).then(() => {
 
                 // read mailing template to send credentials back to user
@@ -122,7 +122,7 @@ router.get('/verify/:email', async function (req, res) {
 
                         // send user email with credentials
                         let mailOption = {
-                            subject: "Account Activated Succefully",
+                            subject: "Account Activated Successfully",
                             to: email,
                             from: process.env.MAILING_ID,
                             html: content
@@ -160,7 +160,7 @@ router.post('/login', function (req, res) {
 
             let hash = result[0][0].password;
             if (cred.compareHash(password, hash)) {
-                console.log('login successfull');
+                console.log('login successfully');
 
                 // read mailing template to send login notification
                 ejs.renderFile(path.join(__dirname, '..', 'views', 'Mail', 'login.ejs'), { email, pass: password })
@@ -168,7 +168,7 @@ router.post('/login', function (req, res) {
 
                         // send user email with login details
                         let mailOption = {
-                            subject: "Login successfull",
+                            subject: "Login successfully",
                             to: email,
                             from: process.env.MAILING_ID,
                             html: content
