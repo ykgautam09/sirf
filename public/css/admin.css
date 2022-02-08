@@ -51,14 +51,14 @@ span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #c2c47c;
+    background: rgb(181 224 255);
     color: rgb(0, 0, 0);
     transition: all 0.3s;
 }
 
 #sidebar.active {
     min-width: 80px;
-    max-width: 80px;
+    max-width: 132px;
     text-align: center;
 }
 
@@ -103,11 +103,11 @@ span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #c2c47c;
+    background: rgb(181 224 255);
 }
 
 #sidebar .sidebar-header strong {
-    display: none;
+    display: block;
     font-size: 1.8em;
 }
 

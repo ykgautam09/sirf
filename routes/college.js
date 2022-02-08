@@ -70,24 +70,7 @@ router.post('/register', upload.single('collegeCertificate'), function (req, res
                                         subject: "Verify your UPIRF account",
                                         to: userData.email,
                                         from: process.env.MAILING_ID,
-                                        html: `<table align="center" border="0" cellpadding="0" cellspacing="0" style="height:100%; width:600px;">
-                                        <!-- BEGIN EMAIL -->
-                                        <tr>
-                                          <td align="center" bgcolor="#ffffff" style="padding:30px">
-                                             <p style="text-align:left">Hello,<br><br>  for your account activation Process, click the link below.
-                                            </p>
-                                            <p>
-                                              <a target="_blank" style="text-decoration:none; background-color: black; border: black 1px solid; color: #fff; padding:10px 10px; display:block;" href="{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}">
-                                                <strong>Verify Account</strong></a>
-                                            </p>
-                                            <p style="text-align:left">This link can only be used once. If link expired, please visit <a href="localhost:5000/register">register</a> and try again.<br><br>If you did not make this request, you can simply ignore this email.</p>
-                                            <p style="text-align:left">
-                                            Sincerely,<br>UPIRF Team
-                                            </p>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>`
+                                        html: data
                                     };
 
                                     mail.sendMail(mailOption)
@@ -188,25 +171,7 @@ router.post('/login', function (req, res) {
                             subject: "Login successfully",
                             to: email,
                             from: process.env.MAILING_ID,
-                            html: `<table align="center" border="0" cellpadding="0" cellspacing="0" style="height:100%; width:600px;">
-                            <!-- BEGIN EMAIL -->
-                            <tr>
-                              <td align="center" bgcolor="#ffffff" style="padding:30px">
-                                 <p style="text-align:left">Hello,<br><br> A login attempt was made from your account</p>
-                                 <p> and You have been logged into your UPIRF account Successfully. </p>
-                                <p> if this was not you then please change your password as soon as possible</p>
-                                 <p>
-                                  <a target="_blank" style="text-decoration:none; background-color: black; border: black 1px solid; color: #fff; padding:10px 10px; display:block;" href="{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}">
-                                    <strong>Change Password</strong></a>
-                                </p>
-                                <p style="text-align:left">This link can only be used once. If link expired, please visit <a href="localhost:5000/register">register</a> and try again.<br><br>If you did not make this request, you can simply ignore this email.</p>
-                                <p style="text-align:left">
-                                Sincerely,<br>UPIRF Team
-                                </p>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>`
+                            html: content
                         }
 
                         mail.sendMail(mailOption)
