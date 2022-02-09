@@ -12,25 +12,59 @@ function studentStrength(section,NT,NE,NP) {
 }
 
 // faculty student ratio
-function facultyStudentratio(section,F,N) {
-    var ratio=F/N;
+function facultyStudentratio(section,F,N,NP) {
+    var ratio;
     var FSR;
-    if(section.toLowerCase()=="architecture"){
-        if(ratio<0.0200){
-            FSR=0;
-        }
-        else{
-            FSR=30*(15*(ratio));
-        }
+
+    // for architecture and management
+    if(section.toLowerCase()=="architecture"||section.toLowerCase()=="management "){
+        ratio=F/N;
+        FSR = 30*(15*(F/N))
     }
+
+    // for rest of the colleges
     else{
-        if(ratio<0.014285714285714285){
-            FSR=0;
-        }
-        else{
-            FSR=30*(15*(ratio));
-        }
-    }    
+       N+=NP;
+       ratio=F/N;
+       FSR = 30*(15*(F/N))
+    } 
+
+switch(section.toLowerCase()) {
+        case "architecture ":
+            if(ratio<1/50){
+                FSR=0;
+            }
+          break;
+        case "management":
+            if(ratio<1/50){
+                FSR=0;
+            }
+          break;
+        case "engineering":
+            if(ratio<1/50){
+                FSR=0;
+            }
+          break;
+        case "pharmacy":
+            if(ratio<1/50){
+                FSR=0;
+            }
+          break;
+        case "law":
+            if(ratio<1/70){
+                FSR=0;
+            }
+          break;
+        case "medical":
+            if(ratio<1/50){
+                FSR=0;
+            }
+          break;
+        default:
+            break;
+
+      }
  return FSR;   
 }
+
 
