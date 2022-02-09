@@ -69,6 +69,11 @@ switch(section) {
                 FSR=0;
             }
           break;
+        case "overall":
+            if(ratio<1/50){
+                FSR=0;
+            }
+          break;
         case "college":
             if(ratio<1/70){
                 FSR=0;
@@ -99,8 +104,54 @@ function FQE(){
 }
 
 
+// function for Financial Resources and their Utilization
+
+function FRUfunction(BC,BO){
+var FRU= 7.5*BC + 22.5*BO ; // f was used here in the sheet
+  return FRU;
+}
 
 
+// function for Combined metric for Publications
+function PUfunction(section) {
+  // f(p/FRQ) ise used need to be analysed
+  var PU;
+
+  switch(section.toLowerCase()) {
+    case "architecture ":
+      PU = 60*P/FRQ;
+      break;
+    case "management":
+      PU=40*P/FRQ;
+      break;
+    case "engineering":
+      PU=35*P/FRQ;
+      break;
+    case "pharmacy":
+      PU = 35 * P/FRQ;
+      break;
+    case "law":
+      PU =50*P/FRQ;
+      break;
+    case "medical":
+      PU =40*P/FRQ;
+      break;
+    case "college":
+      PU = 70 * P/FRQ;
+      break;
+    case "overall":
+      PU = 35*P/FRQ;
+      break;
+    default:
+        break;
+
+  }
+  return PU;
+}
+
+
+
+//f
 
 
 
