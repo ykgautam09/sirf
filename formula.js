@@ -158,7 +158,7 @@ function QPfunction(section){
 
   var QP;
 
-  switch(section.toLowerCase()) {
+  switch(section) {
     case "architecture ":
       QP = 20 * CC/P; 
       break;
@@ -187,8 +187,80 @@ function QPfunction(section){
         break;
 
   }
-
+return QP;
 }
+
+
+// function for IPR and Patents: Patents Published and Granted
+// f function needs to be checked here too
+function IPRfunction(section){
+  var IPR,IPG,IPP;
+  section=section.toLowerCase();
+
+  switch(section) {
+
+    case "engineering":
+      IPG = 10*f(PG);
+      IPP=5*f(PP);
+      break;
+    case "pharmacy":
+      IPG = 10*f(PG);
+      IPP=5*f(PP);
+      break;
+    case "medical":
+      IPG = 5*f(PG);
+      IPP=5*f(PP);
+      break;
+    case "overall":
+      IPG = 10*f(PG);
+      IPP=5*f(PP);
+      break;
+    default:
+        break;
+  }
+  IPR = IPG + IPP ;
+  return IPR;
+}
+
+
+
+// function for Footprint of Projects and Professional Practice (FPPP)
+// f function need to be handled
+function FPPPfunction(section){
+  section=section.toLowerCase();
+  var FPR,FPC,FPPP;
+  switch(section) {
+    case "architecture ":
+      FPR = 10*f(RF);
+      FPC = 10*f(CF); 
+      FPPP = FPR + FPC ;
+      break;
+    case "management":
+      FPR = 5*f(RF);
+      FPC = 5*f(CF);
+      var EDPMDP=10*f(EP); 
+      FPPP = FPR + FPC + EDPMDP;
+      break;
+    case "engineering":
+      FPR = 7.5*f(RF);
+      FPC = 7.5*f(CF);
+      FPPP = FPR + FPC ;
+      break;
+
+    case "law":
+      FPR = 10*f(RF);
+      FPC = 10*f(CF);
+      FPPP = FPR + FPC ;
+      
+      break;
+
+    default:
+        break;
+
+  }
+}
+
+
 
 
 
