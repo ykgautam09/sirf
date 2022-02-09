@@ -1,12 +1,16 @@
+//let's assume function f is used for calculating ratio
+function f(A,B){
+    return A/B;
+}
 
 // Student Strength function
 function studentStrength(section,NT,NE,NP) {
     var SS;
     if(section.toLowerCase()=="architecture"){
-        SS=f(NT,NE)*15 +f(NP)*5;
+        SS=f(NT,NE)*20;
     }
     else{
-        SS= f(NT,NE)*20;
+        SS= f(NT,NE)*15 +f(NP)*5;
     }
     return SS;
 }
@@ -66,5 +70,6 @@ switch(section.toLowerCase()) {
       }
  return FSR;   
 }
+
 
 
