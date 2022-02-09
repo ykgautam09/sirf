@@ -330,9 +330,44 @@ function GUEfunction(section){
       break;
     default:
         break;
-
   }  
 return GUE;
+}
+
+
+// function for median salary GMS
+// f function should be checked
+function GMSfunction(section){
+  section=section.toLowerCase();
+  var GMS;
+
+  switch(section) {
+    case "architecture":
+      GMS=30*f(MS); 
+      break;
+    case "management":
+      GMS=40*f(MS); 
+      break;
+    case "engineering":
+      GMS=25*f(MS);
+      break;
+    case "pharmacy":
+      GMS=25*f(MS);
+      break;
+    case "law":
+      GMS=25*f(MS);
+      break;
+    case "medical":
+      break;
+    case "college":
+      GMS=20*f(MS);
+      break;
+    case "overall":
+      break;
+    default:
+        break;
+  }   
+return GMS;
 }
 
 
