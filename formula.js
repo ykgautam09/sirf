@@ -83,6 +83,23 @@ switch(section) {
 
 
 
+// function for Component Metric of TLR
+// parameters required
+function FQE(){
+  var FQ,FE;
+  
+  if(FRA<0.95) //95 in case of 95 value of percentage
+  FQ = 10* (FRA/95);
+  else
+  FQ=10;
+ 
+  FE = 3*Math.min(3*F1,1) + 3*Math.min(3*F2,1) + 4*Math.min(3*F3,1);
+  var FQE=FQ+FE;
+  return FQE;
+}
+
+
+
 
 
 
