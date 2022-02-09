@@ -373,6 +373,11 @@ return GMS;
 
 
 
+// all the remaining function are almost same and can be implemented using the previous code
+
+
+
+
 
 
 
