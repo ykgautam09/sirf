@@ -39,7 +39,7 @@ function FSRfunction(section,F,N,NP) {
 
     // ratio comparison to score score maximum marks required in each case
 switch(section) {
-        case "architecture ":
+        case "architecture":
             if(ratio<1/50){
                 FSR=0;
             }
@@ -118,7 +118,7 @@ function PUfunction(section) {
   var PU;
 
   switch(section.toLowerCase()) {
-    case "architecture ":
+    case "architecture":
       PU = 60*P/FRQ;
       break;
     case "management":
@@ -159,7 +159,7 @@ function QPfunction(section){
   var QP;
 
   switch(section) {
-    case "architecture ":
+    case "architecture":
       QP = 20 * CC/P; 
       break;
     case "management":
@@ -228,9 +228,9 @@ function IPRfunction(section){
 // f function need to be handled
 function FPPPfunction(section){
   section=section.toLowerCase();
-  var FPR,FPC,FPPP;
+  var FPR,FPC,FPPP,FBD;
   switch(section) {
-    case "architecture ":
+    case "architecture":
       FPR = 10*f(RF);
       FPC = 10*f(CF); 
       FPPP = FPR + FPC ;
@@ -241,10 +241,27 @@ function FPPPfunction(section){
       var EDPMDP=10*f(EP); 
       FPPP = FPR + FPC + EDPMDP;
       break;
+    case "overall":
+      FPR = 5*f(RF);
+      FPC = 5*f(CF);
+      var EDPMDP=5*f(EP); 
+      FPPP = FPR + FPC + EDPMDP;
+      break;
     case "engineering":
       FPR = 7.5*f(RF);
       FPC = 7.5*f(CF);
       FPPP = FPR + FPC ;
+      break;
+    case "pharmacy":
+      FPR = 7.5*f(RF);
+      FPC = 7.5*f(CF);
+      FPPP = FPR + FPC ;
+      break;
+    case "medical":
+      FPR = 5* f(RF) ;
+      FBD = 5 * f(PBD);
+      FPPP = FPR + FBD ;
+
       break;
 
     case "law":
@@ -258,7 +275,67 @@ function FPPPfunction(section){
         break;
 
   }
+  return FPPP;
 }
+
+// function for Combined Metric for Placement and Higher Studies (GPH)
+// parameters required
+function GPHfunction(section){
+  section=section.toLowerCase();
+  var GPH;
+  if(section=="medical")
+  GPH=30*(Np/100 +Nhs/100);
+  else{
+    if(section=="overall")
+    console.log("Not applicable");
+    else
+    GPH=40 * (Np/100 +Nhs/100) ;
+  } 
+
+  return GPH;
+}
+
+
+
+// function for Metric for University Examinations (GUE)
+//parameters required
+function GUEfunction(section){
+  section=section.toLowerCase();
+  var GUE;
+
+  switch(section) {
+    case "architecture":
+      GUE=30*Math.min(Ng/80,1);  
+      break;
+    case "management":
+      GUE=20*Math.min(Ng/80,1); 
+      break;
+    case "engineering":
+      GUE=15*Math.min(Ng/80,1);
+      break;
+    case "pharmacy":
+      GUE=15*Math.min(Ng/80,1);
+      break;
+    case "law":
+      GUE=15*Math.min(Ng/80,1);
+      break;
+    case "medical":
+      GUE=30*Math.min(Ng/80,1);
+      break;
+    case "college":
+      QP = 30*CC/P;
+      break;
+    case "overall":
+      GUE=60*Math.min(Ng/80,1);
+      break;
+    default:
+        break;
+
+  }  
+return GUE;
+}
+
+
 
 
 
