@@ -151,7 +151,44 @@ function PUfunction(section) {
 
 
 
-//f
+//function for Combined metric for Quality of Publications (QP) 
+// f function need to be checked
+function QPfunction(section){
+  section=section.toLowerCase();
+
+  var QP;
+
+  switch(section.toLowerCase()) {
+    case "architecture ":
+      QP = 20 * CC/P; 
+      break;
+    case "management":
+      QP = 40*CC/P; 
+      break;
+    case "engineering":
+      QP = 40*CC/P;
+      break;
+    case "pharmacy":
+      QP = 40*CC/P;
+      break;
+    case "law":
+      QP = 30*CC/P;
+      break;
+    case "medical":
+      QP = 40*CC/P;
+      break;
+    case "college":
+      QP = 30*CC/P;
+      break;
+    case "overall":
+      QP = 35 * CC/P;
+      break;
+    default:
+        break;
+
+  }
+
+}
 
 
 
