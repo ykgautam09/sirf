@@ -8,7 +8,7 @@
                 <p>
                     <a target="_blank"
                         style="text-decoration:none; background-color: black; border: black 1px solid; color: #fff; padding:10px 10px; display:block;"
-                        href="{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}">
+                        href="<%- verificationLink %>">
                         <strong>Verify Account</strong></a>
                 </p>
                 <p style="text-align:left">This link can only be used once. If link expired, please visit <a
