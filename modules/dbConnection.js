@@ -1,5 +1,5 @@
-const mysql = require('mysql2');
-require('dotenv').config();
+const mysql = require("mysql2");
+require("dotenv").config();
 
 
 const dbConnection = mysql.createConnection({
@@ -21,14 +21,14 @@ const pool = mysql.createPool({
 
 dbConnection.connect((err) => {
     if (err) {
-        console.log('Error connecting', err);
+        console.log("Error connecting", err);
         return;
     }
-    console.log('connected as id ' + dbConnection.threadId);
+    console.log("connected as id " + dbConnection.threadId);
 });
 
 
 module.exports = {
     connection: dbConnection,
     pool: pool
-}
+};

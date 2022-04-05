@@ -1,6 +1,6 @@
-const bcrypt = require("bcrypt")
-const cryptoRandomString = require("crypto-random-string")
-require('dotenv').config();
+const bcrypt = require("bcrypt");
+const cryptoRandomString = require("crypto-random-string");
+require("dotenv").config();
 
 
 // generate user id for college 
@@ -20,7 +20,7 @@ function genOtp() {
 
 // generate hash with password
 function genHash(pass) {
-    return bcrypt.hashSync(pass, 10)
+    return bcrypt.hashSync(pass, 10);
 }
 
 // check password with hash
@@ -30,7 +30,7 @@ function compareHash(pass, hash) {
 
 // validate hash with password
 function checkPassword(hash, pass) {
-    return bcrypt.compareSync(pass, hash)
+    return bcrypt.compareSync(pass, hash);
 }
 
 module.exports = {
@@ -40,4 +40,4 @@ module.exports = {
     genHash,
     compareHash,
     checkPassword
-}
+};

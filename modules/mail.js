@@ -1,16 +1,12 @@
-require('dotenv').config();
+require("dotenv").config();
 const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
+const {google} = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 
 
 // create nodemailer transporter equivalent wrapper
 const createTransporter = async () => {
-    const oauth2Client = new OAuth2(
-        process.env.CLIENT_ID,
-        process.env.CLIENT_SECRET,
-        "https://developers.google.com/oauthplayground"
-    );
+    const oauth2Client = new OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, "https://developers.google.com/oauthplayground");
 
     oauth2Client.setCredentials({
         refresh_token: process.env.REFRESH_TOKEN
@@ -28,8 +24,7 @@ const createTransporter = async () => {
     });
 
     const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
+        service: "gmail", auth: {
             type: "OAuth2",
             user: process.env.MAILING_ID,
             accessToken,
@@ -43,20 +38,20 @@ const createTransporter = async () => {
 
     return transporter;
 };
-
+const emailTransporter = createTransporter();
 
 // send mail wrapper function
 const sendMail = async (emailOptions) => {
     try {
-        let emailTransporter = await createTransporter();
-        await emailTransporter.sendMail(emailOptions)
-    }
-    catch (err) {
+        if (!emailTransporter) throw new Error("Transporter not ready");
 
+        const mailResponse = await emailTransporter.sendMail(emailOptions);
+        if (!mailResponse) throw new Error("couldn't send mail try again");
+    } catch (err) {
+        console.log(err);
         throw err;
-
     }
 };
 
 
-module.exports = { sendMail };
+module.exports = {sendMail};
