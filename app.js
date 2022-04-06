@@ -6,8 +6,6 @@ const logger = require("morgan");
 const indexRoute = require("./routes/index");
 const collegeRoute = require("./routes/college");
 
-
-
 // configurations
 dotenv.config();
 const host = process.env.SERVER_HOST;
@@ -19,17 +17,14 @@ app.use("/public", express.static(path.join(__dirname, "/public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-
 // Routes
 app.use("/", indexRoute);
 app.use("/college", collegeRoute);
 
-
-
 // Server Set-up
 app.listen(process.env.SERVER_PORT || "5000", (err) => {
-    if (err) console.log(err);
-    console.log(`Server Up and Running at http://${host}:${port}/`);
+  if (err) console.log(err);
+  console.log(`Server Up and Running at http://${host}:${port}/`);
 });
 
 module.exports = app;
