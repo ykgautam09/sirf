@@ -143,6 +143,7 @@
                 </div>
 
             </div>
+            <!-- student strength -->
             <div id="student_strength" class="d-none">
                 <div class="m-4">
                     <ul class="nav nav-tabs" id="myTab">
@@ -399,6 +400,7 @@
                     </div>
                 </div>
             </div>
+            <!-- placement -->
             <div id="placement" class="d-none">
                 <div class="m-4">
                     <ul class="nav nav-tabs" id="myTab">
@@ -651,6 +653,7 @@
                     </div>
                 </div>
             </div>
+            <!-- .PH.D STUDENT DETAILS SECTION -->
             <div id="phd" class="d-none">
                 <div class="row text-center ">
                     <div class="col-lg-12">
@@ -659,92 +662,93 @@
                 </div>
                 <hr>
                 <!-- form phd student details -->
-                <form action="#" method="post">
 
-                    <div class="card" style="width:84%;">
-                        <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                            <p style="color:red;">**Student pursuing doctoral program till last Academic Year; Students
-                                admitted
-                                in
-                                the current academic
-                                year should not be entered here.</p>
-                        </div>
-                        <table style="width: 50%;">
-                            <tr>
-                                <td>Full Time</td>
-                                <td>
-                                    <input type="number" class="form-control" id="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Part Time</td>
-                                <td>
-                                    <input type="number" class="form-control" id="">
-                                </td>
-                            </tr>
-                        </table>
+                <div class="card" style="width:84%;">
+                    <div style="margin: 20px 0 0 13px;font-weight: bold;">
+
+                        <p style="color:red;">**Student pursuing doctoral program till last Academic Year; Students
+                            admitted
+                            in
+                            the current academic
+                            year should not be entered here.</p>
                     </div>
-                    <hr>
-                    <div class="card" style="width:84%">
-                        <div style="margin: 20px 0 0 13px;font-weight: bold;">
+                    <table style="width: 50%;">
+                        <tr>
+                            <td>Full Time</td>
+                            <td>
+                                <input type="number" class="form-control" id="full_time_phd_students">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Part Time</td>
+                            <td>
+                                <input type="number" class="form-control" id="part_time_phd_students">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div class="card" style="width:84%">
+                    <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                            No. of Ph.D students graduated (including Integrated Ph.D) for previous 3 years
-                        </div>
-                        <table style="width:100%">
-                            <tr>
-                                <td>Academic Year</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Part Time</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Full Time</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                        </table>
+                        No. of Ph.D students graduated (including Integrated Ph.D) for previous 3 years
                     </div>
-                    <div style="margin:17px 0px">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                    <table style="width:100%">
+                        <tr>
+                            <td>Academic Year</td>
+                            <td>
+                                <input type="number" class="form-control" placeholder="current year" id="prev_year1">
 
-                </form>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" placeholder="previous year" id="prev_year2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" placeholder="second last year"
+                                    id="prev_year3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Part Time</td>
+                            <td>
+                                <input type="number" class="form-control  " id="part_time_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="part_time_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="part_time_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Full Time</td>
+                            <td>
+                                <input type="number" class="form-control  " id="full_time_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="full_time_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="full_time_prev3">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="margin:17px 0px">
+                    <button class="btn btn-primary" onclick="phdStudentForm()">Submit</button>
+                </div>
+
+
 
             </div>
 
-
+            <!-- financial resources -->
             <div id="financial_resources" class="d-none">
                 <div class="row text-center ">
                     <div class="col-lg-12">
@@ -752,84 +756,84 @@
                     </div>
                 </div>
                 <hr>
-                <form action="#" method="post">
-                    <div class="card" style="width:100%;">
-                        <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                            <p style="color:red;">**Utilised Amount for the Capital & Operational expenditure for
-                                previous 3 years</p>
-                        </div>
+                <div class="card" style="width:100%;">
+                    <div style="margin: 20px 0 0 13px;font-weight: bold;">
+
+                        <p style="color:red;">**Utilised Amount for the Capital & Operational expenditure for
+                            previous 3 years</p>
                     </div>
-                    <div class="card" style="width:100%">
-                        <div style="margin: 20px 0 0 13px;font-weight: bold;">
+                </div>
+                <div class="card" style="width:100%">
+                    <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                            Annual Capital Expenditure on Academic Activities and Resources (excluding expenditure on
-                            buildings)
-                        </div>
-                        <table style="width:100%">
-                            <tr>
-                                <td>Library</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>New Equipment for Laboratories</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Engineering Workshops</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Other expenditure on creation of Capital Assets (excluding expenditure on Land and
-                                    Building)</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                        </table>
+                        Annual Capital Expenditure on Academic Activities and Resources (excluding expenditure on
+                        buildings)
                     </div>
-                    <div style="margin:17px 0px">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                    <table style="width:100%">
+                        <tr>
+                            <td>Library</td>
+                            <td>
+                                <input type="number" class="form-control  " id="library_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="library_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="library_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>New Equipment for Laboratories</td>
+                            <td>
+                                <input type="number" class="form-control  " id="new_equipments_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="new_equipments_prev2">
+
+                            </td>
+                            <td>
+                                <input type=" number" class="form-control  " id="new_equipments_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Engineering Workshops</td>
+                            <td>
+                                <input type="number" class="form-control" id="engineering_workshop_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="engineering_workshop_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="engineering_workshop_prev3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Other expenditure on creation of Capital Assets (excluding expenditure on Land and
+                                Building)</td>
+                            <td>
+                                <input type="number" class="form-control  " id="other_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="other_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="other_prev3">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="margin:17px 0px">
+                    <button class="btn btn-primary" onclick="financialResourcesForm()">Submit</button>
+                </div>
+
             </div>
-
+            <!-- annual capital expenditure -->
             <div id="annual_capital_expenditure" class="d-none">
                 <div class="row text-center ">
                     <div class="col-lg-12">
@@ -837,64 +841,67 @@
                     </div>
                 </div>
                 <hr>
-                <form action="#" method="post">
 
-                    <div class="card" style="width:100%">
-                        <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                            Annual Operational Expenditure
-                        </div>
-                        <table style="width:100%">
-                            <tr>
-                                <td>Salaries (Teaching and Non Teaching staff)</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
+                <div class="card" style="width:100%">
+                    <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Maintenance of Academic Infrastructure or consumables, other running expenditures
-                                    etc. (excluding maintenance of hostels and allied services)</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Seminars/Conferences/Workshops</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                        </table>
+                        Annual Operational Expenditure
                     </div>
-                    <div style="margin:17px 0px">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                    <table style="width:100%">
+                        <tr>
+                            <td>Salaries (Teaching and Non Teaching staff)</td>
+                            <td>
+                                <input type="number" class="form-control" placeholder="current year" id="salary_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " placeholder="previous year"
+                                    id="salary_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " placeholder="second last year"
+                                    id="salary_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Maintenance of Academic Infrastructure or consumables, other running expenditures
+                                etc. (excluding maintenance of hostels and allied services)</td>
+                            <td>
+                                <input type="number" class="form-control  " id="maintenance_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="maintenance_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="maintenance_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Seminars/Conferences/Workshops</td>
+                            <td>
+                                <input type="number" class="form-control  " id="seminars_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="seminars_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="seminars_prev3">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="margin:17px 0px">
+                    <button class="btn btn-primary" onclick="annualCapitalExpenditureForm()">Submit</button>
+                </div>
+
             </div>
+            <!-- IPR DETAILS -->
             <div id="ipr" class="d-none">
                 <div class="row text-center ">
                     <div class="col-lg-12">
@@ -902,64 +909,62 @@
                     </div>
                 </div>
                 <hr>
-                <form action="#" method="post">
+                <div class="card" style="width:100%">
+                    <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                    <div class="card" style="width:100%">
-                        <div style="margin: 20px 0 0 13px;font-weight: bold;">
-
-                            IPR for previous 3 Calendar years
-                        </div>
-                        <table style="width:100%">
-                            <tr>
-                                <td>Calendar year</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>No. of Patents Published</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>No. of Patents Granted</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-
-                        </table>
+                        IPR for previous 3 Calendar years
                     </div>
-                    <div style="margin:17px 0px">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                    <table style="width:100%">
+                        <tr>
+                            <td>Calendar year</td>
+                            <td>
+                                <input type="number" class="form-control" id="year_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="year_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="year_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>No. of Patents Published</td>
+                            <td>
+                                <input type="number" class="form-control  " id="patents_published_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="patents_published_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="patents_published_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>No. of Patents Granted</td>
+                            <td>
+                                <input type="number" class="form-control  " id="patents_granted_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="patents_granted_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="patents_granted_prev3">
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div style="margin:17px 0px">
+                    <button class="btn btn-primary" onclick="iprForm()">Submit</button>
+                </div>
+
             </div>
+            <!-- SPONSORED RESEARCH SECTION -->
             <div id="sponsored_research" class="d-none">
                 <div class="row text-center ">
                     <div class="col-lg-12">
@@ -967,87 +972,91 @@
                     </div>
                 </div>
                 <hr>
-                <form action="#" method="post">
 
-                    <div class="card" style="width:100%">
-                        <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                            Sponsored Research Details for previous 3 financial years
-                        </div>
-                        <table style="width:100%">
-                            <tr>
-                                <td>Financial Year</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
+                <div class="card" style="width:100%">
+                    <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Total no. of Sponsored Projects</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Total no. of Funding Agencies</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Total Amount Received (Amount in Rupees)</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Amount Received in Words</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                        </table>
+                        Sponsored Research Details for previous 3 financial years
                     </div>
-                    <div style="margin:17px 0px">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                    <table style="width:100%">
+                        <tr>
+                            <td>Financial Year</td>
+                            <td>
+                                <input type="number" class="form-control  " placeholder="current year"
+                                    id="finance_year_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" placeholder="previous year"
+                                    id="finance_year_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " placeholder="second last year"
+                                    id="finance_year_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total no. of Sponsored Projects</td>
+                            <td>
+                                <input type="number" class="form-control  " id="sponsored_projects_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="sponsored_projects_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="sponsored_projects_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total no. of Funding Agencies</td>
+                            <td>
+                                <input type="number" class="form-control  " id="funding_agencies_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="funding_agencies_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="funding_agencies_prev3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total Amount Received (Amount in Rupees)</td>
+                            <td>
+                                <input type="number" class="form-control  " id="amtR_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="amtR_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="amtR_prev3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Amount Received in Words</td>
+                            <td>
+                                <input type="number" class="form-control  " id="amtW_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="amtW_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="amtW_prev3">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="margin:17px 0px">
+                    <button type="submit" class="btn btn-primary" onclick="sponsoredResearchForm()">Submit</button>
+                </div>
+
             </div>
+            <!-- CONSULTANCY PROJECT -->
             <div id="consultancy_project" class="d-none">
                 <div class="row text-center ">
                     <div class="col-lg-12">
@@ -1055,87 +1064,91 @@
                     </div>
                 </div>
                 <hr>
-                <form action="#" method="post">
 
-                    <div class="card" style="width:100%">
-                        <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                            Consultancy Project Details for previous 3 financial years
-                        </div>
-                        <table style="width:100%">
-                            <tr>
-                                <td>Financial Year</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
+                <div class="card" style="width:100%">
+                    <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Total no. of Consultancy Projects</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Total no. of Client Organizations</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Total Amount Received (Amount in Rupees)</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Amount Received in Words</td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control  " id="">
-                                </td>
-                            </tr>
-                        </table>
+                        Consultancy Project Details for previous 3 financial years
                     </div>
-                    <div style="margin:17px 0px">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                    <table style="width:100%">
+                        <tr>
+                            <td>Financial Year</td>
+                            <td>
+                                <input type="number" class="form-control  " placeholder="current year"
+                                    id="fin_year_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " placeholder="previous year"
+                                    id="fin_year_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " placeholder="second last year"
+                                    id="fin_year_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total no. of Consultancy Projects</td>
+                            <td>
+                                <input type="number" class="form-control  " id="total_consultancy_projects_prev1">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="total_consultancy_projects_prev2">
+
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="total_consultancy_projects_prev3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total no. of Client Organizations</td>
+                            <td>
+                                <input type="number" class="form-control  " id="total_client_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="total_client_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="total_client_prev3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total Amount Received (Amount in Rupees)</td>
+                            <td>
+                                <input type="number" class="form-control  " id="amttR_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="amttR_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="amttR_prev3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Amount Received in Words</td>
+                            <td>
+                                <input type="number" class="form-control  " id="amttW_prev1">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="amttW_prev2">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control  " id="amttW_prev3">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="margin:17px 0px">
+                    <button class="btn btn-primary" onclick="consultancyProjectForm()">Submit</button>
+                </div>
                 </form>
             </div>
+            <!-- PCS Facilities -->
             <div id="pcs" class="d-none">
                 <div class="row text-center ">
                     <div class="col-lg-12">
@@ -1143,69 +1156,69 @@
                     </div>
                 </div>
                 <hr>
-                <form action="#" method="post">
 
-                    <div class="card" style="width:100%">
-                        <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                            PCS Facilities: Facilities of physically challenged students
-                        </div>
-                        <table style="width:100%">
-                            <tr>
-                                <td> Do your institution buildings have Lifts/Ramps?</td>
-                                <td>
-                                    <input type="text" class="form-control  " id="">
+                <div class="card" style="width:100%">
+                    <div style="margin: 20px 0 0 13px;font-weight: bold;">
 
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control  " id="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Do your institution have provision for walking aids, including wheelchairs and
-                                    transportation from one building to another for handicapped students?</td>
-                                <td>
-                                    <input type="text" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control  " id="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Do your institution buildings have specially designed toilets for handicapped
-                                    students?</td>
-                                <td>
-                                    <input type="text" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control  " id="">
-
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control  " id="">
-                                </td>
-                            </tr>
-
-                        </table>
+                        PCS Facilities: Facilities of physically challenged students
                     </div>
-                    <div style="margin:17px 0px">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                    <table style="width:100%">
+                        <tr>
+                            <td> Do your institution buildings have Lifts/Ramps?</td>
+                            <td>
+                                <input type="text" class="form-control  " placeholder="current" id="lift_prev1">
+
+                            </td>
+                            <td>
+                                <input type="text" class="form-control  " placeholder="previous" id="lift_prev2">
+
+                            </td>
+                            <td>
+                                <input type="text" class="form-control  " placeholder="second last" id="lift_prev3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> Do your institution have provision for walking aids, including wheelchairs and
+                                transportation from one building to another for handicapped students?</td>
+                            <td>
+                                <input type="text" class="form-control  " id="walking_aids_prev1">
+
+                            </td>
+                            <td>
+                                <input type="text" class="form-control  " id="walking_aids_prev2">
+
+                            </td>
+                            <td>
+                                <input type="text" class="form-control  " id="walking_aids_prev3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> Do your institution buildings have specially designed toilets for handicapped
+                                students?</td>
+                            <td>
+                                <input type="text" class="form-control  " id="toilets_prev1">
+
+                            </td>
+                            <td>
+                                <input type="text" class="form-control  " id="toilets_prev2">
+
+                            </td>
+                            <td>
+                                <input type="text" class="form-control  " id="toilets_prev3">
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div style=" margin:17px 0px">
+                    <button class="btn btn-primary" onclick="pcsFacilitiesForm()">Submit</button>
+                </div>
+
             </div>
         </div>
 
-
+        <!-- SIDEBAR SCRIPT -->
 
         <script type="text/javascript">
             $(document).ready(function () {
@@ -1344,4 +1357,278 @@
 
         </script>
 
+        <!-- FORMS AJAX REQUESTS -->
+
+        <!-- 1.PHD AJAX REQUEST 
+        
+        request POST to /college/dashboard/phd-student-details
+        -->
+        <script type="text/javascript">
+            function phdStudentForm() {
+                data = {};
+                data.fullTime = document.getElementById("full_time_phd_students").value;
+                data.partTime = document.getElementById("part_time_phd_students").value;
+                // last three year data of part time students
+                // prev1 represent current year data
+                // prev2 represent previous year data
+                // prev3 represent second last year data
+                // eg prev1=2022 prev2=2021 prev3=2020
+                data.partTimePrev1 = document.getElementById("part_time_prev1").value;
+                data.partTimePrev2 = document.getElementById("part_time_prev2").value;
+                data.partTimePrev3 = document.getElementById("part_time_prev3").value;
+
+                data.fullTimePrev1 = document.getElementById("full_time_prev1").value;
+                data.fullTimePrev2 = document.getElementById("full_time_prev2").value;
+                data.fullTimeprev3 = document.getElementById("full_time_prev3").value;
+                console.log(data);
+                $.ajax({
+                    url: "/college/dashboard/phd-student-details",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log(data);
+                    }
+                });
+            }
+        </script>
+        <!-- 2.financial resources form ajax request 
+        
+        request POST to /college/dashboard/financial-resources
+        -->
+        <script type="text/javascript">
+            function financialResourcesForm() {
+                data = {};
+                // last three year data of part time students
+                // prev1 represent current year data
+                // prev2 represent previous year data
+                // prev3 represent second last year data
+                // eg prev1=2022 prev2=2021 prev3=2020
+
+                // library
+                data.libraryPrev1 = document.getElementById("library_prev1").value;
+                data.libraryPrev2 = document.getElementById("library_prev2").value;
+                data.libraryPrev3 = document.getElementById("library_prev3").value;
+                // new equipments
+                data.newEquipmentsPrev1 = document.getElementById("new_equipments_prev1").value;
+                data.newEquipmentsPrev2 = document.getElementById("new_equipments_prev2").value;
+                data.newEquipmentsPrev3 = document.getElementById("new_equipments_prev3").value;
+                // engineering workshop
+                data.engineeringWorkshopPrev1 = document.getElementById("engineering_workshop_prev1").value;
+                data.engineeringWorkshopPrev2 = document.getElementById("engineering_workshop_prev2").value;
+                data.engineeringWorkshopPrev3 = document.getElementById("engineering_workshop_prev3").value;
+                // others
+                data.otherPrev1 = document.getElementById("other_prev1").value;
+                data.otherPrev2 = document.getElementById("other_prev2").value;
+                data.otherPrev3 = document.getElementById("other_prev3").value;
+
+                console.log(data);
+                $.ajax({
+                    url: "/college/dashboard/financial-resources",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log(data);
+                    }
+                });
+            }
+        </script>
+        <!-- annual capital expenditure ajax request 
+        
+            request- POST to /college/dashboard/annual-expenditure
+        -->
+        <script type="text/javascript">
+            function annualCapitalExpenditureForm() {
+                data = {};
+
+                // last three year data of part time students
+                // prev1 represent current year data
+                // prev2 represent previous year data
+                // prev3 represent second last year data
+                // eg prev1=2022 prev2=2021 prev3=2020
+                data.salaryPrev1 = document.getElementById("salary_prev1").value;
+                data.salaryPrev2 = document.getElementById("salary_prev2").value;
+                data.salaryPrev3 = document.getElementById("salary_prev3").value;
+
+                data.maintenancePrev1 = document.getElementById("maintenance_prev1").value;
+                data.maintenancePrev2 = document.getElementById("maintenance_prev2").value;
+                data.maintenancePrev3 = document.getElementById("maintenance_prev3").value;
+
+                data.seminarsPrev1 = document.getElementById("seminars_prev1").value;
+                data.seminarsPrev2 = document.getElementById("seminars_prev2").value;
+                data.seminarsPrev3 = document.getElementById("seminars_prev3").value;
+                console.log(data);
+                $.ajax({
+                    url: "/college/dashboard/annual-expenditure",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log(data);
+                    }
+                });
+            }
+        </script>
+        <!--  IPR form ajax request 
+        
+        request POST to /college/dashboard/ipr-details
+        -->
+        <script type="text/javascript">
+            function iprForm() {
+                data = {};
+
+                // last three year data of part time students
+                // prev1 represent current year data
+                // prev2 represent previous year data
+                // prev3 represent second last year data
+                // eg prev1=2022 prev2=2021 prev3=2020
+                data.yearPrev1 = document.getElementById("year_prev1").value;
+                data.yearPrev2 = document.getElementById("year_prev2").value;
+                data.yearPrev3 = document.getElementById("year_prev3").value;
+
+                data.patentsPublishedPrev1 = document.getElementById("patents_published_prev1").value;
+                data.patentsPublishedPrev1 = document.getElementById("patents_published_prev2").value;
+                data.patentsPublishedPrev1 = document.getElementById("patents_published_prev3").value;
+
+                data.patentsGrantedPrev1 = document.getElementById("patents_granted_prev1").value;
+                data.patentsGrantedPrev2 = document.getElementById("patents_granted_prev2").value;
+                data.patentsGrantedPrev3 = document.getElementById("patents_granted_prev3").value;
+                console.log(data);
+                $.ajax({
+                    url: "/college/dashboard/ipr-details",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log(data);
+                    }
+                });
+            }
+        </script>
+        <!-- sponsored research form ajax request
+        
+            request- POST   to /college/dashboard/sponsored-research
+        -->
+        <script type="text/javascript">
+            function sponsoredResearchForm() {
+                data = {};
+
+                // last three year data of part time students
+                // prev1 represent current year data
+                // prev2 represent previous year data
+                // prev3 represent second last year data
+                // eg prev1=2022 prev2=2021 prev3=2020
+                data.financeYearPrev1 = document.getElementById("finance_year_prev1").value;
+                data.financeYearPrev2 = document.getElementById("finance_year_prev2").value;
+                data.financeYearPrev3 = document.getElementById("finance_year_prev3").value;
+
+                data.sponsoredProjectPrev1 = document.getElementById("sponsored_projects_prev1").value;
+                data.sponsoredProjectPrev2 = document.getElementById("sponsored_projects_prev2").value;
+                data.sponsoredProjectPrev3 = document.getElementById("sponsored_projects_prev3").value;
+
+                data.fundingAgenciesPrev1 = document.getElementById("funding_agencies_prev1").value;
+                data.fundingAgenciesPrev2 = document.getElementById("funding_agencies_prev2").value;
+                data.fundingAgenciesPrev3 = document.getElementById("funding_agencies_prev3").value;
+
+                data.amtRPrev1 = document.getElementById("amtR_prev1").value;
+                data.amtRPrev2 = document.getElementById("amtR_prev2").value;
+                data.amtRPrev3 = document.getElementById("amtR_prev3").value;
+
+                data.amtWPrev1 = document.getElementById("amtW_prev1").value;
+                data.amtWPrev2 = document.getElementById("amtW_prev2").value;
+                data.amtWPrev3 = document.getElementById("amtW_prev3").value;
+                console.log(data);
+                $.ajax({
+                    url: "/college/dashboard/sponsored-research",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log(data);
+                    }
+                });
+            }
+        </script>
+
+        <!--  consultancy project form ajax request -
+        
+        request type- POST  to /college/dashboard/consultancy-project
+        -->
+        <script type="text/javascript">
+            function consultancyProjectForm() {
+                data = {};
+
+                // last three year data of part time students
+                // prev1 represent current year data
+                // prev2 represent previous year data
+                // prev3 represent second last year data
+                // eg prev1=2022 prev2=2021 prev3=2020
+                data.finYearPrev1 = document.getElementById("fin_year_prev1").value;
+                data.finYearPrev2 = document.getElementById("fin_year_prev2").value;
+                data.finYearPrev3 = document.getElementById("fin_year_prev3").value;
+
+                data.totalConsultancyProjectPrev1 = document.getElementById("total_consultancy_projects_prev1").value;
+                data.totalConsultancyProjectPrev2 = document.getElementById("total_consultancy_projects_prev2").value;
+                data.totalConsultancyProjectPrev3 = document.getElementById("total_consultancy_projects_prev3").value;
+
+                data.totalClientPrev1 = document.getElementById("total_client_prev1").value;
+                data.totalClientPrev2 = document.getElementById("total_client_prev2").value;
+                data.totalClientPrev3 = document.getElementById("total_client_prev3").value;
+
+                data.amttRPrev1 = document.getElementById("amttR_prev1").value;
+                data.amttRPrev2 = document.getElementById("amttR_prev2").value;
+                data.amttRPrev3 = document.getElementById("amttR_prev3").value;
+
+                data.amttWPrev1 = document.getElementById("amttW_prev1").value;
+                data.amttWPrev2 = document.getElementById("amttW_prev2").value;
+                data.amttWPrev3 = document.getElementById("amttW_prev3").value;
+                console.log(data);
+                $.ajax({
+                    url: "/college/dashboard/consultancy-project",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log(data);
+                    }
+                });
+            }
+        </script>
+        <!--    PCS facilities form ajax request 
+
+        request type- POST  to /college/dashboard/pcs-facilities
+        -->
+        <script type="text/javascript">
+            function pcsFacilitiesForm() {
+                data = {};
+
+                // last three year data of part time students
+                // prev1 represent current year data
+                // prev2 represent previous year data
+                // prev3 represent second last year data
+                // eg prev1=2022 prev2=2021 prev3=2020
+                data.liftPrev1 = document.getElementById("lift_prev1").value;
+                data.liftPrev2 = document.getElementById("lift_prev2").value;
+                data.liftPrev3 = document.getElementById("lift_prev3").value;
+
+                data.walkingAidsPrev1 = document.getElementById("walking_aids_prev1").value;
+                data.walkingAidsPrev2 = document.getElementById("walking_aids_prev2").value;
+                data.walkingAidsPrev3 = document.getElementById("walking_aids_prev3").value;
+
+                data.toiletsPrev1 = document.getElementById("toilets_prev3").value;
+                data.toiletsPrev2 = document.getElementById("toilets_prev2").value;
+                data.toiletsPrev3 = document.getElementById("toilets_prev3").value;
+                console.log(data);
+                $.ajax({
+                    url: "/college/dashboard/pcs-facilities",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log(data);
+                    }
+                });
+            }
+        </script>
 </body>
