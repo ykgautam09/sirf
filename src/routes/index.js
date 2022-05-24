@@ -1,52 +1,53 @@
 const express = require("express");
 const router = express.Router();
+const db = require("./../db/models/index");
 
 // all routes are relative to /
-router.get("/", function (req, res) {
+router.get("/", (req, res) => {
   res.render("Home/index");
 });
 
 // about page
-router.get("/about", function (req, res) {
+router.get("/about", (req, res) => {
   res.render("Home/about");
 });
 // faq page
-router.get("/faq", function (req, res) {
+router.get("/faq", (req, res) => {
   res.render("Home/faq");
 });
 
 // parameter  page
-router.get("/parameter", function (req, res) {
+router.get("/parameter", (req, res) => {
   res.render("Home/parameter");
 });
 
 // ranking page
-router.get("/ranking", function (req, res) {
+router.get("/ranking", (req, res) => {
   res.render("Home/ranking");
 });
 
 // notification/advt page
-router.get("/notification", function (req, res) {
+router.get("/notification", (req, res) => {
   res.render("Home/notification");
 });
 
 // contact page
-router.get("/contact", function (req, res) {
+router.get("/contact", (req, res) => {
   res.render("Home/contact");
 });
 
 // document page
-router.get("/document", function (req, res) {
+router.get("/document", (req, res) => {
   res.render("Home/document");
 });
 
 // advertisement page
-router.get("/advertisement", function (req, res) {
+router.get("/advertisement", (req, res) => {
   res.render("Home/advertisement");
 });
 
 // error page
-router.get("/error", function (req, res) {
+router.get("/error", (req, res) => {
   res.render("Home/error");
 });
 
