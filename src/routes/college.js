@@ -45,20 +45,23 @@ router.post(
         certificate: req.file.filename
       };
       console.log(userData, ")))___");
-      const institute = await Institute.findOne({
+      const instituteRes = await Institute.findOne({
         where: { email: userData.email }
       });
 
       // user email already exists
-      if (institute && institute?.email === userData.email) {
-        console.log(`user ${institute.email} already in database::`, institute);
+      if (instituteRes && instituteRes?.email === userData.email) {
+        console.log(
+          `user ${instituteRes.email} already in database::`,
+          instituteRes
+        );
         throw new Error("user already exists");
       }
 
       // save user data in database
-      const user = await Institute.create(userData, { transaction });
-      console.log(user);
-      if (!user) throw new Error("user couldn't be created");
+      const institute = await Institute.create(userData, { transaction });
+      console.log(institute);
+      if (!institute) throw new Error("user couldn't be created");
       console.log("user inserted in registration table", userData.email);
 
       // generate otp and save into database
@@ -71,7 +74,7 @@ router.post(
       const dbOtp = await OTP.create(
         {
           code: otp,
-          user_id: user.id,
+          institute_id: institute.id,
           expiry_at: addMinutes(new Date().getTime(), 2)
         },
         { transaction }
@@ -116,18 +119,18 @@ router.get("/verify/:email", async (req, res) => {
     let pass = req.query.code;
 
     // read otp created less than 2 min ago
-    const user = await Institute.findOne({ where: { email } });
-    if (!user) throw new Error("User doesn't exist");
+    const institute = await Institute.findOne({ where: { email } });
+    if (!institute) throw new Error("User doesn't exist");
     const otpRes = await OTP.findOne({
       where: { expiry_at: { [db.Sequelize.Op.gte]: db.Sequelize.fn("NOW") } },
-      user_id: user.id
+      institute_id: institute.id
     });
     let otp = otpRes.code;
     if (otp === pass) {
       console.log("account verified successfully");
       // asynchronously delete stored otp once used Successfully
       await OTP.destroy(
-        { where: { user_id: user.id, code: otp } },
+        { where: { institute_id: institute.id, code: otp } },
         { transaction }
       );
     }
@@ -138,7 +141,7 @@ router.get("/verify/:email", async (req, res) => {
     // account verified and set password to set account active
     await Institute.update(
       { password: passHash },
-      { where: { id: user.id } },
+      { where: { id: institute.id } },
       { transaction }
     );
     // read mailing template to send credentials back to user
@@ -172,8 +175,8 @@ router.post("/login", async (req, res) => {
     let email = req.body.userEmail;
     let password = req.body.password;
 
-    const user = await Institute.findOne({ where: { email } });
-    let hash = user.password;
+    const institute = await Institute.findOne({ where: { email } });
+    let hash = institute.password;
     if (cred.compareHash(password, hash)) {
       console.log("login successfully");
 

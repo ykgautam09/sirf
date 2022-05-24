@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       OTP.hasMany(models.Institute, {
-        sourceKey: "user_id",
+        sourceKey: "institute_id",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
         foreignKey: "id"
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 
   OTP.init(
     {
-      user_id: { type: DataTypes.UUID, allowNull: false },
+      institute_id: { type: DataTypes.UUID, allowNull: false },
       code: DataTypes.STRING,
       expiry_at: { type: DataTypes.DATE, allowNull: false }
     },

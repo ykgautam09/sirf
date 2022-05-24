@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      user_id: {
+      institute_id: {
         allowNull: false,
         type: DataTypes.INTEGER
       },
