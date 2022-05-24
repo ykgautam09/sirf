@@ -43,10 +43,10 @@ const createTransporter = async () => {
 
   return transporter;
 };
-const emailTransporter = createTransporter();
 
 // send mail wrapper function
 const sendMail = async (emailOptions) => {
+  const emailTransporter = await createTransporter();
   try {
     if (!emailTransporter) throw new Error("Transporter not ready");
 
