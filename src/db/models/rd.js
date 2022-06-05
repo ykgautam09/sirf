@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       year: DataTypes.INTEGER,
       institute_id: DataTypes.INTEGER,
       rd: DataTypes.INTEGER,
-      oss: DataTypes.INTEGER
+      os: DataTypes.INTEGER,
+      oc: DataTypes.INTEGER
     },
     {
       sequelize,

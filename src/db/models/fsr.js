@@ -13,10 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   fsr.init(
     {
-      fsr: DataTypes.INTEGER,
-      f: DataTypes.INTEGER,
       year: DataTypes.INTEGER,
-      institute_id: DataTypes.INTEGER
+      institute_id: DataTypes.INTEGER,
+      f: DataTypes.INTEGER,
+      n: DataTypes.INTEGER,
+      fsr: DataTypes.INTEGER
     },
     {
       sequelize,

@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       year: DataTypes.INTEGER,
       institute_id: DataTypes.INTEGER,
       f: DataTypes.INTEGER,
-      nesc: DataTypes.INTEGER
+      nesc: DataTypes.INTEGER,
+      escs: DataTypes.INTEGER
     },
     {
       sequelize,

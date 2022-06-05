@@ -13,10 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   fru.init(
     {
-      bc: DataTypes.INTEGER,
-      br: DataTypes.INTEGER,
       year: DataTypes.INTEGER,
-      institute_id: DataTypes.INTEGER
+      institute_id: DataTypes.INTEGER,
+      f: DataTypes.INTEGER,
+      fru: DataTypes.INTEGER,
+      bc: DataTypes.INTEGER,
+      bo: DataTypes.INTEGER
     },
     {
       sequelize,

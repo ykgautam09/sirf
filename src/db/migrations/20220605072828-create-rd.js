@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("escs", {
+    await queryInterface.createTable("rds", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,13 +14,13 @@ module.exports = {
       institute_id: {
         type: Sequelize.INTEGER
       },
-      f: {
+      rd: {
         type: Sequelize.INTEGER
       },
-      nesc: {
+      os: {
         type: Sequelize.INTEGER
       },
-      escs: {
+      oc: {
         type: Sequelize.INTEGER
       },
       created_at: {
@@ -34,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("escs");
+    await queryInterface.dropTable("rds");
   }
 };
