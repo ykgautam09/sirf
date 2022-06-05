@@ -14,22 +14,34 @@ module.exports = {
       institute_id: {
         type: Sequelize.INTEGER
       },
-      ipr: {
+      course: {
+        type: Sequelize.STRING
+      },
+      cal_yr_current: {
         type: Sequelize.INTEGER
       },
-      f: {
+      cal_yr_prev: {
         type: Sequelize.INTEGER
       },
-      pg: {
+      cal_yr_second: {
         type: Sequelize.INTEGER
       },
-      ipg: {
+      patent_pub_current: {
         type: Sequelize.INTEGER
       },
-      ipp: {
+      patent_pub_prev: {
         type: Sequelize.INTEGER
       },
-      pp: {
+      patent_pub_second: {
+        type: Sequelize.INTEGER
+      },
+      patent_granted_current: {
+        type: Sequelize.INTEGER
+      },
+      patent_granted_prev: {
+        type: Sequelize.INTEGER
+      },
+      patent_granted_second: {
         type: Sequelize.INTEGER
       },
       created_at: {
