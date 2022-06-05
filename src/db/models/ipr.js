@@ -15,12 +15,16 @@ module.exports = (sequelize, DataTypes) => {
     {
       year: DataTypes.INTEGER,
       institute_id: DataTypes.INTEGER,
-      ipr: DataTypes.INTEGER,
-      f: DataTypes.INTEGER,
-      pg: DataTypes.INTEGER,
-      ipg: DataTypes.INTEGER,
-      ipp: DataTypes.INTEGER,
-      pp: DataTypes.INTEGER
+      course: DataTypes.STRING,
+      cal_yr_current: DataTypes.INTEGER,
+      cal_yr_prev: DataTypes.INTEGER,
+      cal_yr_second: DataTypes.INTEGER,
+      patent_pub_current: DataTypes.INTEGER,
+      patent_pub_prev: DataTypes.INTEGER,
+      patent_pub_second: DataTypes.INTEGER,
+      patent_granted_current: DataTypes.INTEGER,
+      patent_granted_prev: DataTypes.INTEGER,
+      patent_granted_second: DataTypes.INTEGER
     },
     {
       sequelize,

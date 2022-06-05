@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class pcs extends Model {
+  class placement extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,26 +11,27 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  pcs.init(
+  placement.init(
     {
       year: DataTypes.INTEGER,
       institute_id: DataTypes.INTEGER,
       course: DataTypes.STRING,
-      have_lift_current: DataTypes.STRING,
-      have_lift_prev: DataTypes.STRING,
-      have_lift_second: DataTypes.STRING,
-      walking_aids_current: DataTypes.STRING,
-      walking_aids_prev: DataTypes.STRING,
-      walking_aids_second: DataTypes.STRING,
-      toilets_current: DataTypes.STRING,
-      toilets_prev: DataTypes.STRING,
-      toilets_second: DataTypes.STRING
+      intake_firstyr_total: DataTypes.INTEGER,
+      first_year_total: DataTypes.INTEGER,
+      academic: DataTypes.INTEGER,
+      lateral_total: DataTypes.INTEGER,
+      acade_year: DataTypes.INTEGER,
+      min_time: DataTypes.INTEGER,
+      placed_total: DataTypes.INTEGER,
+      med_salary: DataTypes.INTEGER,
+      high_studies_total: DataTypes.INTEGER
     },
     {
       sequelize,
-      modelName: "pcs",
+      modelName: "placement",
+      tableName: "placements",
       underscored: true
     }
   );
-  return pcs;
+  return placement;
 };

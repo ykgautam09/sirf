@@ -11,6 +11,10 @@ const db = require("./../db/models/index");
 const Institute = db.Institute;
 const OTP = db.OTP;
 const StudentStrngth = db.student_strength;
+const Placement = db.placement;
+const Phd = db.phd;
+const Financial = db.financial;
+const Annual = db.annual_exp;
 
 // accept user data from register page
 router.post(
@@ -325,7 +329,7 @@ router.get("/register", (req, res) => {
 // dashboard
 router.get("/dashboard", (req, res) => {
   res.render("College/dashboard", {
-    instituteId: "1345",
+    instituteId: "123456",
     instituteName: "KNIT"
   });
 });
@@ -356,7 +360,7 @@ router.post("/dashboard/student-strength/:course", async (req, res) => {
       tution_fee_reimburse_institute: parseFloat(req.body.feeInstitute),
       tution_fee_reimburse_private: parseFloat(req.body.feePrivate),
       no_tution_fee_reimburse: parseFloat(req.body.notFee),
-      course: req.query.course,
+      course: req.params.course,
       institute_id: institute.id
     };
     const studentStrength = await StudentStrngth.create(studentStrengthData);
@@ -364,7 +368,191 @@ router.post("/dashboard/student-strength/:course", async (req, res) => {
     console.log(studentStrength);
     return res.json(studentStrength);
   } catch (err) {
-    console.log("link doesn't matched with database", err);
+    console.log("data could not be saved", err);
+    res.send("Couldn't save data");
+  }
+});
+// handle student placement data
+router.post("/dashboard/placement/:course", async (req, res) => {
+  try {
+    console.log(req.body);
+    const institute = await Institute.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { aktu_id: req.body.instituteId },
+          { aicte_id: req.body.instituteId }
+        ]
+      }
+    });
+    if (!institute) throw new Error("no institute");
+    let placementData = {
+      intake_firstyr_total: parseInt(req.body.firstYearIntake),
+      first_year_total: parseInt(req.body.firstYearAdmitted),
+      academic: parseInt(req.body.academicYear),
+      lateral_total: parseInt(req.body.lateralEntry),
+      acade_year: parseInt(req.body.acadeYear),
+      min_time: parseInt(req.body.minStipulatedTime),
+      placed_total: parseInt(req.body.placed),
+      med_salary: parseInt(req.body.medianSalary),
+      high_studies_total: parseInt(req.body.higherStudies),
+      course: req.params.course,
+      institute_id: institute.id
+    };
+    console.log("hello ", placementData);
+    const placement = await Placement.create(placementData);
+    if (!placement) throw new Error("can't save");
+    console.log(placement);
+    return res.json(placement);
+  } catch (err) {
+    console.log("data could not be saved", err);
+    res.send("Couldn't save data");
+  }
+});
+
+router.post("/dashboard/phd-student-details", async (req, res) => {
+  try {
+    console.log(req.body);
+    const institute = await Institute.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { aktu_id: req.body.instituteId },
+          { aicte_id: req.body.instituteId }
+        ]
+      }
+    });
+    if (!institute) throw new Error("no institute");
+    let phdData = {
+      full_time_total: parseInt(req.body.fullTime),
+      part_time_total: parseInt(req.body.partTime),
+      academic_current: parseInt(req.body.Prev1),
+      academic_prev: parseInt(req.body.Prev2),
+      academic_second: parseInt(req.body.Prev3),
+      part_time_total_current: parseInt(req.body.partTimePrev1),
+      part_time_total_prev: parseInt(req.body.partTimePrev2),
+      part_time_total_second: parseInt(req.body.partTimePrev3),
+      full_time_total_current: parseInt(req.body.fullTimePrev1),
+      full_time_total_prev: parseInt(req.body.fullTimePrev2),
+      full_time_total_second: parseInt(req.body.fullTimePrev3),
+      course: req.params.course,
+      institute_id: institute.id
+    };
+    console.log("hello ", phdData);
+    const phd = await Phd.create(phdData);
+    if (!phd) throw new Error("can't save");
+    console.log(phd);
+    return res.json(phd);
+  } catch (err) {
+    console.log("data could not be saved", err);
+    res.send("Couldn't save data");
+  }
+});
+
+router.post("/dashboard/financial-resources", async (req, res) => {
+  try {
+    console.log(req.body);
+    const institute = await Institute.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { aktu_id: req.body.instituteId },
+          { aicte_id: req.body.instituteId }
+        ]
+      }
+    });
+    if (!institute) throw new Error("no institute");
+    let frData = {
+      library_current: parseInt(req.body.libraryPrev1),
+      library_prev: parseInt(req.body.libraryPrev2),
+      library_second: parseInt(req.body.libraryPrev3),
+      new_equip_current: parseInt(req.body.newEquipmentsPrev1),
+      new_equip_prev: parseInt(req.body.newEquipmentsPrev2),
+      new_equip_second: parseInt(req.body.newEquipmentsPrev3),
+      engg_workshop_current: parseInt(req.body.engineeringWorkshopPrev1),
+      engg_workshop_prev: parseInt(req.body.engineeringWorkshopPrev2),
+      engg_workshop_second: parseInt(req.body.engineeringWorkshopPrev3),
+      other_exp_current: parseInt(req.body.otherPrev1),
+      other_exp_prev: parseInt(req.body.otherPrev2),
+      other_exp_second: parseInt(req.body.otherPrev3),
+      course: req.params.course,
+      institute_id: institute.id
+    };
+    console.log("hello ", frData);
+    const fr = await Financial.create(frData);
+    if (!fr) throw new Error("can't save");
+    console.log(fr);
+    return res.json(fr);
+  } catch (err) {
+    console.log("data could not be saved", err);
+    res.send("Couldn't save data");
+  }
+});
+router.post("/dashboard/annual-expenditure", async (req, res) => {
+  try {
+    console.log(req.body);
+    const institute = await Institute.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { aktu_id: req.body.instituteId },
+          { aicte_id: req.body.instituteId }
+        ]
+      }
+    });
+    if (!institute) throw new Error("no institute");
+    let annualExpData = {
+      sal_current: parseInt(req.body.salaryPrev1),
+      sal_prev: parseInt(req.body.salaryPrev2),
+      sal_second: parseInt(req.body.salaryPrev3),
+      mainte_current: parseInt(req.body.maintenancePrev1),
+      mainte_prev: parseInt(req.body.maintenancePrev2),
+      mainte_second: parseInt(req.body.maintenancePrev3),
+      seminar_current: parseInt(req.body.seminarsPrev1),
+      seminar_prev: parseInt(req.body.seminarsPrev2),
+      seminar_second: parseInt(req.body.seminarsPrev3),
+      course: req.params.course,
+      institute_id: institute.id
+    };
+    console.log("hello ", annualExpData);
+    const annual_ex = await Annual.create(annualExpData);
+    if (!annual_ex) throw new Error("can't save");
+    console.log(annual_ex);
+    return res.json(annual_ex);
+  } catch (err) {
+    console.log("data could not be saved", err);
+    res.send("Couldn't save data");
+  }
+});
+
+router.post("/dashboard/ipr-details", async (req, res) => {
+  try {
+    console.log(req.body);
+    const institute = await Institute.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { aktu_id: req.body.instituteId },
+          { aicte_id: req.body.instituteId }
+        ]
+      }
+    });
+    if (!institute) throw new Error("no institute");
+    let annualExpData = {
+      sal_current: parseInt(req.body.salaryPrev1),
+      sal_prev: parseInt(req.body.salaryPrev2),
+      sal_second: parseInt(req.body.salaryPrev3),
+      mainte_current: parseInt(req.body.maintenancePrev1),
+      mainte_prev: parseInt(req.body.maintenancePrev2),
+      mainte_second: parseInt(req.body.maintenancePrev3),
+      seminar_current: parseInt(req.body.seminarsPrev1),
+      seminar_prev: parseInt(req.body.seminarsPrev2),
+      seminar_second: parseInt(req.body.seminarsPrev3),
+      course: req.params.course,
+      institute_id: institute.id
+    };
+    console.log("hello ", annualExpData);
+    const annual_ex = await Annual.create(annualExpData);
+    if (!annual_ex) throw new Error("can't save");
+    console.log(annual_ex);
+    return res.json(annual_ex);
+  } catch (err) {
+    console.log("data could not be saved", err);
     res.send("Couldn't save data");
   }
 });
