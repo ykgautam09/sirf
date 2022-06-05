@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("pcs", {
+    await queryInterface.createTable("institute_ranks", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,35 +14,26 @@ module.exports = {
       institute_id: {
         type: Sequelize.INTEGER
       },
-      course: {
+      category: {
         type: Sequelize.STRING
       },
-      have_lift_current: {
-        type: Sequelize.STRING
+      tlr: {
+        type: Sequelize.FLOAT
       },
-      have_lift_prev: {
-        type: Sequelize.STRING
+      rpc: {
+        type: Sequelize.FLOAT
       },
-      have_lift_second: {
-        type: Sequelize.STRING
+      go: {
+        type: Sequelize.FLOAT
       },
-      walking_aids_current: {
-        type: Sequelize.STRING
+      oi: {
+        type: Sequelize.FLOAT
       },
-      walking_aids_prev: {
-        type: Sequelize.STRING
+      pr: {
+        type: Sequelize.FLOAT
       },
-      walking_aids_second: {
-        type: Sequelize.STRING
-      },
-      toilets_current: {
-        type: Sequelize.STRING
-      },
-      toilets_prev: {
-        type: Sequelize.STRING
-      },
-      toilets_second: {
-        type: Sequelize.STRING
+      rank: {
+        type: Sequelize.FLOAT
       },
       created_at: {
         allowNull: false,
@@ -55,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("pcs");
+    await queryInterface.dropTable("institute_ranks");
   }
 };

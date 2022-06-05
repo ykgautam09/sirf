@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("iprs", {
+    await queryInterface.createTable("pcs_forms", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,32 +17,32 @@ module.exports = {
       course: {
         type: Sequelize.STRING
       },
-      cal_yr_current: {
-        type: Sequelize.INTEGER
+      have_lift_current: {
+        type: Sequelize.STRING
       },
-      cal_yr_prev: {
-        type: Sequelize.INTEGER
+      have_lift_prev: {
+        type: Sequelize.STRING
       },
-      cal_yr_second: {
-        type: Sequelize.INTEGER
+      have_lift_second: {
+        type: Sequelize.STRING
       },
-      patent_pub_current: {
-        type: Sequelize.INTEGER
+      walking_aids_current: {
+        type: Sequelize.STRING
       },
-      patent_pub_prev: {
-        type: Sequelize.INTEGER
+      walking_aids_prev: {
+        type: Sequelize.STRING
       },
-      patent_pub_second: {
-        type: Sequelize.INTEGER
+      walking_aids_second: {
+        type: Sequelize.STRING
       },
-      patent_granted_current: {
-        type: Sequelize.INTEGER
+      toilets_current: {
+        type: Sequelize.STRING
       },
-      patent_granted_prev: {
-        type: Sequelize.INTEGER
+      toilets_prev: {
+        type: Sequelize.STRING
       },
-      patent_granted_second: {
-        type: Sequelize.INTEGER
+      toilets_second: {
+        type: Sequelize.STRING
       },
       created_at: {
         allowNull: false,
@@ -55,6 +55,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("iprs");
+    await queryInterface.dropTable("pcs_forms");
   }
 };

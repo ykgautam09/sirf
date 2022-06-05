@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class gss extends Model {
+  class institute_rank extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,22 +11,24 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  gss.init(
+  institute_rank.init(
     {
       year: DataTypes.INTEGER,
       institute_id: DataTypes.INTEGER,
-      gss: DataTypes.INTEGER,
-      f: DataTypes.INTEGER,
-      nss: DataTypes.INTEGER,
-      gphd: DataTypes.INTEGER,
-      nphd: DataTypes.INTEGER,
-      oi: DataTypes.INTEGER
+      category: DataTypes.STRING,
+      tlr: DataTypes.FLOAT,
+      rpc: DataTypes.FLOAT,
+      go: DataTypes.FLOAT,
+      oi: DataTypes.FLOAT,
+      pr: DataTypes.FLOAT,
+      rank: DataTypes.FLOAT
     },
     {
       sequelize,
-      modelName: "gss",
+      modelName: "institute_rank",
+      tableName: "institute_ranks",
       underscored: true
     }
   );
-  return gss;
+  return institute_rank;
 };

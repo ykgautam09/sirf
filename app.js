@@ -5,6 +5,7 @@ const path = require("path");
 const logger = require("morgan");
 const indexRoute = require("./src/routes/index");
 const collegeRoute = require("./src/routes/college");
+const adminRoute = require("./src/routes/admin");
 
 // configurations
 dotenv.config();
@@ -20,6 +21,7 @@ app.set("views", path.join(__dirname, "src/views"));
 // Routes
 app.use("/", indexRoute);
 app.use("/college", collegeRoute);
+app.use("/admin", adminRoute);
 
 // Server Set-up
 app.listen(process.env.SERVER_PORT || "5000", (err) => {
