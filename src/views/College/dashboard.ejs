@@ -1370,7 +1370,7 @@
         <script type="text/javascript">
             function ssUg4Form() {
                 let data = {};
-                data.instituteId = "1345"
+                data.instituteId = '<%= instituteId%>';
                 data.maleStudents = document.getElementById("male_students").value;
                 data.femaleStudents = document.getElementById("female_students").value;
                 data.totalStudents = document.getElementById("total_students").value;
@@ -1742,8 +1742,8 @@
                 data.yearPrev3 = document.getElementById("year_prev3").value;
 
                 data.patentsPublishedPrev1 = document.getElementById("patents_published_prev1").value;
-                data.patentsPublishedPrev1 = document.getElementById("patents_published_prev2").value;
-                data.patentsPublishedPrev1 = document.getElementById("patents_published_prev3").value;
+                data.patentsPublishedPrev2 = document.getElementById("patents_published_prev2").value;
+                data.patentsPublishedPrev3 = document.getElementById("patents_published_prev3").value;
 
                 data.patentsGrantedPrev1 = document.getElementById("patents_granted_prev1").value;
                 data.patentsGrantedPrev2 = document.getElementById("patents_granted_prev2").value;
@@ -1832,13 +1832,13 @@
                 data.totalClientPrev2 = document.getElementById("total_client_prev2").value;
                 data.totalClientPrev3 = document.getElementById("total_client_prev3").value;
 
-                data.amttRPrev1 = document.getElementById("amttR_prev1").value;
-                data.amttRPrev2 = document.getElementById("amttR_prev2").value;
-                data.amttRPrev3 = document.getElementById("amttR_prev3").value;
+                data.amtRPrev1 = document.getElementById("amttR_prev1").value;
+                data.amtRPrev2 = document.getElementById("amttR_prev2").value;
+                data.amtRPrev3 = document.getElementById("amttR_prev3").value;
 
-                data.amttWPrev1 = document.getElementById("amttW_prev1").value;
-                data.amttWPrev2 = document.getElementById("amttW_prev2").value;
-                data.amttWPrev3 = document.getElementById("amttW_prev3").value;
+                data.amtWPrev1 = document.getElementById("amttW_prev1").value;
+                data.amtWPrev2 = document.getElementById("amttW_prev2").value;
+                data.amtWPrev3 = document.getElementById("amttW_prev3").value;
                 console.log(data);
                 $.ajax({
                     url: "/college/dashboard/consultancy-project",

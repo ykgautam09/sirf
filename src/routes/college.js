@@ -15,10 +15,10 @@ const Placement = db.placement;
 const Phd = db.phd;
 const Financial = db.financial;
 const Annual = db.annual_exp;
-const Ipr = db.ipr;
+const IprForm = db.ipr_form;
 const Sponsor = db.spon;
 const Consultancy = db.consult;
-const Pcs = db.pc;
+const PcsForm = db.pcs_form;
 
 // accept user data from register page
 router.post(
@@ -32,6 +32,7 @@ router.post(
         name: req.body.collegeName,
         email: req.body.collegeEmail,
         type: req.body.collegeType,
+        course: req.body.course,
         certificate: req.file.filename
       };
       console.log(userData, ")))___");
@@ -551,7 +552,7 @@ router.post("/dashboard/ipr-details", async (req, res) => {
       course: req.params.course,
       institute_id: institute.id
     };
-    const ipr = await Ipr.create(iprData);
+    const ipr = await IprForm.create(iprData);
     if (!ipr) throw new Error("can't save");
     console.log(ipr);
     return res.json(ipr);
@@ -588,9 +589,9 @@ router.post("/dashboard/sponsored-research", async (req, res) => {
       total_amt_prev: parseInt(req.body.amtRPrev2),
       total_amt_second: parseInt(req.body.amtRPrev3),
 
-      total_amt_rec_current: parseInt(req.body.amtWPrev1),
-      total_amt_rec_prev: parseInt(req.body.amtWPrev2),
-      total_amt_rec_second: parseInt(req.body.amtWPrev3),
+      total_amt_rec_current: req.body.amtWPrev1,
+      total_amt_rec_prev: req.body.amtWPrev2,
+      total_amt_rec_second: req.body.amtWPrev3,
 
       course: req.params.course,
       institute_id: institute.id
@@ -632,9 +633,9 @@ router.post("/dashboard/consultancy-project", async (req, res) => {
       total_amt_prev: parseInt(req.body.amtRPrev2),
       total_amt_second: parseInt(req.body.amtRPrev3),
 
-      total_amt_rec_current: parseInt(req.body.amtWPrev1),
-      total_amt_rec_prev: parseInt(req.body.amtWPrev2),
-      total_amt_rec_second: parseInt(req.body.amtWPrev3),
+      total_amt_rec_current: req.body.amtWPrev1,
+      total_amt_rec_prev: req.body.amtWPrev2,
+      total_amt_rec_second: req.body.amtWPrev3,
 
       course: req.params.course,
       institute_id: institute.id
@@ -676,7 +677,7 @@ router.post("/dashboard/pcs-facilities", async (req, res) => {
       course: req.params.course,
       institute_id: institute.id
     };
-    const pcs = await Pcs.create(pcsData);
+    const pcs = await PcsForm.create(pcsData);
     if (!pcs) throw new Error("can't save");
     console.log(pcs);
     return res.json(pcs);

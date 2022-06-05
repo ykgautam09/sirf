@@ -18,6 +18,10 @@ module.exports = {
         allowNull: false,
         type: DataTypes.STRING
       },
+      course: {
+        allowNull: false,
+        type: DataTypes.STRING
+      },
       email: {
         allowNull: false,
         type: DataTypes.STRING

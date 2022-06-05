@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
+      course: DataTypes.STRING,
       certificate: { type: DataTypes.TEXT, allowNull: false },
       type: { type: DataTypes.ENUM, values: ["GOVERNMENT", "PRIVATE"] }
     },
