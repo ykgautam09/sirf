@@ -6,9 +6,11 @@ const { addMinutes } = require("date-fns");
 const upload = require("../services/upload");
 const cred = require("../modules/credential");
 const { sendMail } = require("../services/mail");
+
 const db = require("./../db/models/index");
 const Institute = db.Institute;
 const OTP = db.OTP;
+const StudentStrngth = db.student_strength;
 
 // accept user data from register page
 router.post(
@@ -188,7 +190,10 @@ router.post("/login", async (req, res) => {
         });
     } else throw new Error("password doesn't match");
 
-    return res.render("College/dashboard");
+    return res.render("College/dashboard", {
+      instituteId: institute.aktu_id,
+      instituteName: "KNNNI"
+    });
   } catch (err) {
     console.log("something goes wrong", err);
     res.send("Credentials Doesn't Matched!");
@@ -319,7 +324,49 @@ router.get("/register", (req, res) => {
 
 // dashboard
 router.get("/dashboard", (req, res) => {
-  res.render("College/dashboard");
+  res.render("College/dashboard", {
+    instituteId: "1345",
+    instituteName: "KNIT"
+  });
+});
+
+// handle student strength data
+router.post("/dashboard/student-strength/:course", async (req, res) => {
+  try {
+    console.log(req.body);
+    const institute = await Institute.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { aktu_id: req.body.instituteId },
+          { aicte_id: req.body.instituteId }
+        ]
+      }
+    });
+    if (!institute) throw new Error("no institute");
+    let studentStrengthData = {
+      msn: parseInt(req.body.maleStudents),
+      fsn: parseInt(req.body.femaleStudents),
+      tsn: parseInt(req.body.totalStudents),
+      in_state_mf: parseInt(req.body.withinState),
+      out_state_mf: parseInt(req.body.outsideState),
+      out_country_mf: parseInt(req.body.outsideCountry),
+      eco_back_mf: parseInt(req.body.economicallyBackward),
+      social_chal_mf: parseInt(req.body.sociallyChallenged),
+      tution_fee_reimburse_state_center: parseFloat(req.body.feeState),
+      tution_fee_reimburse_institute: parseFloat(req.body.feeInstitute),
+      tution_fee_reimburse_private: parseFloat(req.body.feePrivate),
+      no_tution_fee_reimburse: parseFloat(req.body.notFee),
+      course: req.query.course,
+      institute_id: institute.id
+    };
+    const studentStrength = await StudentStrngth.create(studentStrengthData);
+    if (!studentStrength) throw new Error("can't save");
+    console.log(studentStrength);
+    return res.json(studentStrength);
+  } catch (err) {
+    console.log("link doesn't matched with database", err);
+    res.send("Couldn't save data");
+  }
 });
 
 module.exports = router;
