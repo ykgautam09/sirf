@@ -15,6 +15,10 @@ const Placement = db.placement;
 const Phd = db.phd;
 const Financial = db.financial;
 const Annual = db.annual_exp;
+const Ipr = db.ipr;
+const Sponsor = db.spon;
+const Consultancy = db.consult;
+const Pcs = db.pc;
 
 // accept user data from register page
 router.post(
@@ -533,28 +537,152 @@ router.post("/dashboard/ipr-details", async (req, res) => {
       }
     });
     if (!institute) throw new Error("no institute");
-    let annualExpData = {
-      sal_current: parseInt(req.body.salaryPrev1),
-      sal_prev: parseInt(req.body.salaryPrev2),
-      sal_second: parseInt(req.body.salaryPrev3),
-      mainte_current: parseInt(req.body.maintenancePrev1),
-      mainte_prev: parseInt(req.body.maintenancePrev2),
-      mainte_second: parseInt(req.body.maintenancePrev3),
-      seminar_current: parseInt(req.body.seminarsPrev1),
-      seminar_prev: parseInt(req.body.seminarsPrev2),
-      seminar_second: parseInt(req.body.seminarsPrev3),
+    console.log("hello ", req.body);
+    let iprData = {
+      cal_yr_current: parseInt(req.body.yearPrev1),
+      cal_yr_prev: parseInt(req.body.yearPrev2),
+      cal_yr_second: parseInt(req.body.yearPrev3),
+      patent_pub_current: parseInt(req.body.patentsPublishedPrev1),
+      patent_pub_prev: parseInt(req.body.patentsPublishedPrev2),
+      patent_pub_second: parseInt(req.body.patentsPublishedPrev3),
+      patent_granted_current: parseInt(req.body.patentsGrantedPrev1),
+      patent_granted_prev: parseInt(req.body.patentsGrantedPrev1),
+      patent_granted_second: parseInt(req.body.patentsGrantedPrev1),
       course: req.params.course,
       institute_id: institute.id
     };
-    console.log("hello ", annualExpData);
-    const annual_ex = await Annual.create(annualExpData);
-    if (!annual_ex) throw new Error("can't save");
-    console.log(annual_ex);
-    return res.json(annual_ex);
+    const ipr = await Ipr.create(iprData);
+    if (!ipr) throw new Error("can't save");
+    console.log(ipr);
+    return res.json(ipr);
   } catch (err) {
     console.log("data could not be saved", err);
     res.send("Couldn't save data");
   }
 });
 
+router.post("/dashboard/sponsored-research", async (req, res) => {
+  try {
+    console.log(req.body);
+    const institute = await Institute.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { aktu_id: req.body.instituteId },
+          { aicte_id: req.body.instituteId }
+        ]
+      }
+    });
+    if (!institute) throw new Error("no institute");
+    console.log("hello ", req.body);
+    let sponsorData = {
+      fin_yr_current: parseInt(req.body.financeYearPrev1),
+      fin_yr_prev: parseInt(req.body.financeYearPrev2),
+      fin_yr_second: parseInt(req.body.financeYearPrev3),
+      spons_current: parseInt(req.body.sponsoredProjectPrev1),
+      spons_prev: parseInt(req.body.sponsoredProjectPrev2),
+      spons_second: parseInt(req.body.sponsoredProjectPrev3),
+      agencies_current: parseInt(req.body.fundingAgenciesPrev1),
+      agencies_prev: parseInt(req.body.fundingAgenciesPrev2),
+      agencies_second: parseInt(req.body.fundingAgenciesPrev3),
+      total_amt_current: parseInt(req.body.amtRPrev1),
+      total_amt_prev: parseInt(req.body.amtRPrev2),
+      total_amt_second: parseInt(req.body.amtRPrev3),
+
+      total_amt_rec_current: parseInt(req.body.amtWPrev1),
+      total_amt_rec_prev: parseInt(req.body.amtWPrev2),
+      total_amt_rec_second: parseInt(req.body.amtWPrev3),
+
+      course: req.params.course,
+      institute_id: institute.id
+    };
+    const sponsor = await Sponsor.create(sponsorData);
+    if (!sponsor) throw new Error("can't save");
+    console.log(sponsor);
+    return res.json(sponsor);
+  } catch (err) {
+    console.log("data could not be saved", err);
+    res.send("Couldn't save data");
+  }
+});
+
+router.post("/dashboard/consultancy-project", async (req, res) => {
+  try {
+    console.log(req.body);
+    const institute = await Institute.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { aktu_id: req.body.instituteId },
+          { aicte_id: req.body.instituteId }
+        ]
+      }
+    });
+    if (!institute) throw new Error("no institute");
+    console.log("hello ", req.body);
+    let consultancyData = {
+      fin_yr_current: parseInt(req.body.finYearPrev1),
+      fin_yr_prev: parseInt(req.body.finYearPrev2),
+      fin_yr_second: parseInt(req.body.finYearPrev3),
+      cons_current: parseInt(req.body.totalConsultancyProjectPrev1),
+      cons_prev: parseInt(req.body.totalConsultancyProjectPrev2),
+      cons_second: parseInt(req.body.totalConsultancyProjectPrev3),
+      total_client_current: parseInt(req.body.totalClientPrev1),
+      total_client_prev: parseInt(req.body.totalClientPrev2),
+      total_client_second: parseInt(req.body.totalClientPrev3),
+      total_amt_current: parseInt(req.body.amtRPrev1),
+      total_amt_prev: parseInt(req.body.amtRPrev2),
+      total_amt_second: parseInt(req.body.amtRPrev3),
+
+      total_amt_rec_current: parseInt(req.body.amtWPrev1),
+      total_amt_rec_prev: parseInt(req.body.amtWPrev2),
+      total_amt_rec_second: parseInt(req.body.amtWPrev3),
+
+      course: req.params.course,
+      institute_id: institute.id
+    };
+    const consultancy = await Consultancy.create(consultancyData);
+    if (!consultancy) throw new Error("can't save");
+    console.log(consultancy);
+    return res.json(consultancy);
+  } catch (err) {
+    console.log("data could not be saved", err);
+    res.send("Couldn't save data");
+  }
+});
+
+router.post("/dashboard/pcs-facilities", async (req, res) => {
+  try {
+    console.log(req.body);
+    const institute = await Institute.findOne({
+      where: {
+        [db.Sequelize.Op.or]: [
+          { aktu_id: req.body.instituteId },
+          { aicte_id: req.body.instituteId }
+        ]
+      }
+    });
+    if (!institute) throw new Error("no institute");
+    console.log("hello ", req.body);
+    let pcsData = {
+      have_lift_current: parseInt(req.body.liftPrev1),
+      have_lift_prev: parseInt(req.body.liftPrev2),
+      have_lift_second: parseInt(req.body.liftPrev3),
+      walking_aids_current: parseInt(req.body.walkingAidsPrev1),
+      walking_aids_prev: parseInt(req.body.walkingAidsPrev2),
+      walking_aids_second: parseInt(req.body.walkingAidsPrev3),
+      toilets_current: parseInt(req.body.toiletsPrev1),
+      toilets_prev: parseInt(req.body.toiletsPrev2),
+      toilets_second: parseInt(req.body.toiletsPrev3),
+
+      course: req.params.course,
+      institute_id: institute.id
+    };
+    const pcs = await Pcs.create(pcsData);
+    if (!pcs) throw new Error("can't save");
+    console.log(pcs);
+    return res.json(pcs);
+  } catch (err) {
+    console.log("data could not be saved", err);
+    res.send("Couldn't save data");
+  }
+});
 module.exports = router;

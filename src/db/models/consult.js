@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class spons extends Model {
+  class consult extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  spons.init(
+  consult.init(
     {
       year: DataTypes.INTEGER,
       institute_id: DataTypes.INTEGER,
@@ -19,12 +19,12 @@ module.exports = (sequelize, DataTypes) => {
       fin_yr_current: DataTypes.INTEGER,
       fin_yr_prev: DataTypes.INTEGER,
       fin_yr_second: DataTypes.INTEGER,
-      spons_current: DataTypes.INTEGER,
-      spons_prev: DataTypes.INTEGER,
-      spons_second: DataTypes.INTEGER,
-      agencies_current: DataTypes.INTEGER,
-      agencies_prev: DataTypes.INTEGER,
-      agencies_second: DataTypes.INTEGER,
+      cons_current: DataTypes.INTEGER,
+      cons_prev: DataTypes.INTEGER,
+      cons_second: DataTypes.INTEGER,
+      total_client_current: DataTypes.INTEGER,
+      total_client_prev: DataTypes.INTEGER,
+      total_client_second: DataTypes.INTEGER,
       total_amt_current: DataTypes.INTEGER,
       total_amt_prev: DataTypes.INTEGER,
       total_amt_second: DataTypes.INTEGER,
@@ -34,9 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "spons",
+      modelName: "consult",
+      tableName: "consults",
       underscored: true
     }
   );
-  return spons;
+  return consult;
 };
