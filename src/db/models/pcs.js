@@ -15,20 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       year: DataTypes.INTEGER,
       institute_id: DataTypes.INTEGER,
-      course: DataTypes.STRING,
-      have_lift_current: DataTypes.STRING,
-      have_lift_prev: DataTypes.STRING,
-      have_lift_second: DataTypes.STRING,
-      walking_aids_current: DataTypes.STRING,
-      walking_aids_prev: DataTypes.STRING,
-      walking_aids_second: DataTypes.STRING,
-      toilets_current: DataTypes.STRING,
-      toilets_prev: DataTypes.STRING,
-      toilets_second: DataTypes.STRING
+      pcs: DataTypes.INTEGER
     },
     {
       sequelize,
       modelName: "pcs",
+      tableName: "pcs",
       underscored: true
     }
   );

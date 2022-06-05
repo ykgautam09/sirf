@@ -11,7 +11,7 @@ module.exports = {
       bc: {
         type: DataTypes.INTEGER
       },
-      br: {
+      bo: {
         type: DataTypes.INTEGER
       },
       year: {

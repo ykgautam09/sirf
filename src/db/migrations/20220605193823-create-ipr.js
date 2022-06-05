@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("gsses", {
+    await queryInterface.createTable("iprs", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,22 +14,22 @@ module.exports = {
       institute_id: {
         type: Sequelize.INTEGER
       },
-      gss: {
+      ipr: {
         type: Sequelize.INTEGER
       },
       f: {
         type: Sequelize.INTEGER
       },
-      nss: {
+      pg: {
         type: Sequelize.INTEGER
       },
-      gphd: {
+      ipg: {
         type: Sequelize.INTEGER
       },
-      nphd: {
+      ipp: {
         type: Sequelize.INTEGER
       },
-      oi: {
+      pp: {
         type: Sequelize.INTEGER
       },
       created_at: {
@@ -43,6 +43,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("gsses");
+    await queryInterface.dropTable("iprs");
   }
 };
