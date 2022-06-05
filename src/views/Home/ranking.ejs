@@ -1,112 +1,71 @@
 
-<%- include("./_header.ejs") -%>
 <style>
+
   .container-sm{
-  border-radius: 6px;
-  padding: 2%;
-}
-.btn:hover{
-  background-color:blue;
-  padding-left:1 10%;
-  transition: 100ms;
-  transform: scale(1.1);
-  font-weight: 500;
+      background: #fff;
+      margin-top: 4%;
+      border-radius: 6px;
+      padding: 2%;
+  }
+  .box p{
+      text-align: justify;
+      color: #484848;
+      font-size: .9rem;
+      font-family: 'OpenSansRegular',Arial,Helvetica,sans-serif
+  }
+  table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+  }
+
+  tr:nth-child(even) {
+      background-color: #dddddd;
+  }
+  </style>
+  <%- include("./_header.ejs") -%>
   
-}
-.list{
-  padding: 0;
-  margin: 0 auto;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 3rem;
-
-}
-@media only screen and (max-width: 600px) {
-.list {
-gap: 3rem;
-}
-.img-fluid{
-  display: none;
-}
-}
-  .card-img-top:hover{
-    transform: scale(1.2);
-  }    
-  .card-img-top{
-    transition: transform .2s;
-  }    
-
-</style>
-
-<div class="container-sm">
-  <img src="/public/home/image/ra.JPG" class="img-fluid" alt="..." style="width: 100%;
-  height:100%;">
-  <br><br><br><br>
-  <div class="list">
-      <div class="card" style="width: 8rem; border-radius: 50%; border: white;">
-         <a href=""> <img src="/public/home/image/Overall_WL.png" class="card-img-top" alt="..."></a>
-          <br>
-          <a href="#" class="btn btn-primary" style="position: relative;">Overall</a>
+      <img src="/public/home/image/about-inner-banner.jpg" style="width: 100%;
+    height: auto;">
+   
+      <div class="container-sm">
+        <h2>College_Name Ranking</h2>
+        <table>
+        <tr>
+          <th>College</th>
+          <th>Rank</th>
+        </tr>
+        <tr>
+          <td>Alfreds Futterkiste</td>
+          <td>Maria Anders</td>
+        </tr>
+        <tr>
+          <td>Centro comercial Moctezuma</td>
+          <td>Francisco Chang</td>
+        </tr>
+        <tr>
+          <td>Ernst Handel</td>
+          <td>Roland Mendel</td>
+        </tr>
+        <tr>
+          <td>Island Trading</td>
+          <td>Helen Bennett</td>
+        </tr>
+        <tr>
+          <td>Laughing Bacchus Winecellars</td>
+          <td>Yoshi Tannamuri</td>
+        </tr>
+        <tr>
+          <td>Magazzini Alimentari Riuniti</td>
+          <td>Giovanni Rovelli</td>
+        </tr>
+      </table>
         </div>
-    
-      <!-- <div class="card" style="width: 8rem; border-radius: 50%; border: white; ">
-        <a href=""> <img src="/public/home/image/Uni_WL.png" class="card-img-top" alt="..."></a>
-          <br>
-          <a href="#" class="btn btn-primary" style="position: relative;">University</a>
-        </div> -->
-    
-      <div class="card" style="width: 8rem; border-radius: 50%; border: white; ">
-        <a href=""> <img src="/public/home/image/Eng_WL.png" class="card-img-top" alt="..."></a>
-          <br>
-          <a href="#" class="btn btn-primary" style="position: relative;">Engineering</a>
-        </div>
-    
-      <div class="card" style="width: 8rem; border-radius: 50%; border: white; ">
-        <a href=""> <img src="/public/home/image/Manag_WL.png" class="card-img-top" alt="..."></a>
-          <br>
-          <a href="#" class="btn btn-primary" style="position: relative;">Management</a>
-        </div>
-    
-      <div class="card" style="width: 8rem; border-radius: 50%; border: white; ">
-        <a href="">  <img src="/public/home/image/Pharm_WL.png" class="card-img-top" alt="..."></a>
-          <br>
-          <a href="#" class="btn btn-primary" style="position: relative;">Pharmacy</a>
-        </div>
-    
-      <!-- <div class="card" style="width: 8rem; border-radius: 50%; border: white; ">
-        <a href="">  <img src="/public/home/image/College_WL.png" class="card-img-top" alt="..."></a>
-          <br>
-          <a href="#" class="btn btn-primary" style="position: relative;">College</a>
-        </div> -->
-    
-      <!-- <div class="card" style="width: 8rem; border-radius: 50%; border: white; ">
-        <a href="">  <img src="/public/home/image/Medi_WL.png" class="card-img-top" alt="..."></a>
-          <br>
-          <a href="#" class="btn btn-primary" style="position: relative;">Medical</a>
-        </div>
-    
-      <div class="card" style="width: 8rem; border-radius: 50%; border: white; ">
-        <a href="">  <img src="/public/home/image/Law_WL.png" class="card-img-top" alt="..."></a>
-          <br>
-          <a href="#" class="btn btn-primary" style="position: relative;">Law</a>
-        </div> -->
-      <div class="card" style="width: 8rem; border-radius: 50%; border: white; ">
-        <a href=""> <img src="/public/home/image/Arch_WL.png" class="card-img-top" alt="..."></a>
-          <br>
-          <a href="#" class="btn btn-primary" style="position: relative;">Architecture</a>
-        </div>
-      <div class="card" style="width: 8rem; border-radius: 50%; border: white; ">
-        <a href="">  <img src="/public/home/image/Research_WL.png" class="card-img-top" alt="...">
-          <br><br>
-          <a href="#" class="btn btn-primary" style="position: relative;">Research</a>
-        </div>
-      <br>
-    
-  </div>
-  <br>
-  <br><br>
-
-     <%- include("./_footer.ejs") -%>
+        
+  <%- include("./_footer.ejs") -%>
