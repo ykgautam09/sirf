@@ -700,7 +700,7 @@ router.post("/dashboard/consultancy-project", async (req, res) => {
       total_amt_prev: parseInt(req.body.amtRPrev2),
       total_amt_second: parseInt(req.body.amtRPrev3),
 
-      total_amt_rec_current: req.body.amtWPrev,
+      total_amt_rec_current: req.body.amtWPrev1,
       total_amt_rec_prev: req.body.amtWPrev2,
       total_amt_rec_second: req.body.amtWPrev3,
 
