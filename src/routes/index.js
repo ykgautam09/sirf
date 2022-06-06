@@ -23,7 +23,7 @@ router.get("/parameter", (req, res) => {
 
 // ranking page
 router.get("/ranking", (req, res) => {
-  res.render("Home/ranking");
+  res.render("Home/ranking1");
 });
 
 // notification/advt page

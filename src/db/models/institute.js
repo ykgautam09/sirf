@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: "CASCADE",
         foreignKey: "institute_id"
       });
+      Institute.hasOne(models.institute_rank, {
+        sourceKey: "id",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        foreignKey: "institute_id"
+      });
     }
   }
 

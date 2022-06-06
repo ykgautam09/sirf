@@ -143,15 +143,15 @@ router.get("/generate-rank/:code", async (req, res) => {
         FRU.create({ bc, bo, fru, year, institute_id: instituteId });
 
         // // pu
-        // p = 20; // need to fetched
-        // frq = 7; // need to fetched
-        // pu = scoreFormula.PUfunction(instituteType, frq, p);
-        // PU.create({ p, frq, pu, year, institute_id: instituteId });
+        p = 20; // need to fetched
+        frq = 7; // need to fetched
+        pu = scoreFormula.PUfunction(instituteType, frq, p);
+        PU.create({ p, frq, pu, year, institute_id: instituteId });
         //
-        // // qp
-        // cc = 12; // need to fetched
-        // qp = scoreFormula.QPfunction(instituteType, p, cc);
-        // QP.create({ cc, qp, p, year, institute_id: instituteId });
+        // qp
+        cc = 12; // need to fetched
+        qp = scoreFormula.QPfunction(instituteType, p, cc);
+        QP.create({ cc, qp, p, year, institute_id: instituteId });
 
         // // ipr
         // pp = iprForm.patent_pub_current + iprForm.patent_pub_prev + iprForm.patent_pub_second;
@@ -196,17 +196,21 @@ router.get("/generate-rank/:code", async (req, res) => {
 router.get("/ranking", async (req, res) => {
   const ranks = await InstituteRank.findAll({ order: ["rank"] });
   // const ranks = await InstituteRank.findAll({ order: ["rank"] ,include:[Institute]},);
-
+  console.log("ranks ", ranks);
   let names = [];
   for (let i = 0; i < ranks.length; i++) {
     let name = await Institute.findAll({
       where: { aktu_id: ranks[i].institute_id }
     });
     names.push(name[0].name);
-    // console.log(name[0].name);
+    console.log("name ", name[0].name);
   }
 
   // console.log(names);
   return res.render("Home/ranking", { ranks: ranks, names: names });
+});
+
+router.get("/my-data", (req, res) => {
+  res.render("College/mydata");
 });
 module.exports = router;
