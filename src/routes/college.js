@@ -15,10 +15,11 @@ const Placement = db.placement;
 const Phd = db.phd;
 const Financial = db.financial;
 const Annual = db.annual_exp;
-const IprForm = db.ipr_form;
+const Ipr = db.ipr;
+const Iprform = db.ipr_form;
 const Sponsor = db.spon;
 const Consultancy = db.consult;
-const PcsForm = db.pcs_form;
+const Pcsform = db.pcs_form;
 
 // accept user data from register page
 router.post(
@@ -332,11 +333,77 @@ router.get("/register", (req, res) => {
 });
 
 // dashboard
-router.get("/dashboard", (req, res) => {
-  res.render("College/dashboard", {
-    instituteId: "123456",
-    instituteName: "KNIT"
-  });
+router.get("/dashboard", async (req, res) => {
+  try {
+    const sug4 = await StudentStrngth.findOne({
+      where: { institute_id: "123456", course: "ug4" }
+    });
+    const sug5 = await StudentStrngth.findOne({
+      where: { institute_id: "123456", course: "ug5" }
+    });
+    const spg2 = await StudentStrngth.findOne({
+      where: { institute_id: "123456", course: "pg2" }
+    });
+    const spgin = await StudentStrngth.findOne({
+      where: { institute_id: "123456", course: "pgIntegrated" }
+    });
+    const pug4 = await Placement.findOne({
+      where: { institute_id: "123456", course: "ug4" }
+    });
+    const pug5 = await Placement.findOne({
+      where: { institute_id: "123456", course: "ug5" }
+    });
+    const ppg2 = await Placement.findOne({
+      where: { institute_id: "123456", course: "pg2" }
+    });
+    const ppgin = await Placement.findOne({
+      where: { institute_id: "123456", course: "pgIntegrated" }
+    });
+    console.log("hello sug4 new", sug4);
+    const phdData = await Phd.findOne({
+      where: { institute_id: "123456" }
+    });
+    const financialData = await Financial.findOne({
+      where: { institute_id: "123456" }
+    });
+    const annualData = await Annual.findOne({
+      where: { institute_id: "123456" }
+    });
+    const iprData = await Iprform.findOne({
+      where: { institute_id: "123456" }
+    });
+    const sponData = await Sponsor.findOne({
+      where: { institute_id: "123456" }
+    });
+    const consData = await Consultancy.findOne({
+      where: { institute_id: "123456" }
+    });
+    const psData = await Pcsform.findOne({
+      where: { institute_id: "123456" }
+    });
+    res.render("College/dashboard", {
+      instituteId: "123456",
+      instituteName: "KNIT",
+      phd: phdData,
+      financial: financialData,
+      annual: annualData,
+      ipr: iprData,
+      spon: sponData,
+      cons: consData,
+      ps: psData,
+      sug4: sug4,
+      sug5: sug5,
+      spg2: spg2,
+      spgin: spgin,
+      pug4: pug4,
+      pug5: pug5,
+      ppg2: ppg2,
+      ppgin: ppgin
+    });
+  } catch (err) {
+    console.log("data could not be saved", err);
+    res.send("Couldn't save data");
+  }
 });
 
 // handle student strength data
@@ -552,7 +619,7 @@ router.post("/dashboard/ipr-details", async (req, res) => {
       course: req.params.course,
       institute_id: institute.id
     };
-    const ipr = await IprForm.create(iprData);
+    const ipr = await Iprform.create(iprData);
     if (!ipr) throw new Error("can't save");
     console.log(ipr);
     return res.json(ipr);
@@ -677,7 +744,7 @@ router.post("/dashboard/pcs-facilities", async (req, res) => {
       course: req.params.course,
       institute_id: institute.id
     };
-    const pcs = await PcsForm.create(pcsData);
+    const pcs = await Pcsform.create(pcsData);
     if (!pcs) throw new Error("can't save");
     console.log(pcs);
     return res.json(pcs);
@@ -686,4 +753,5 @@ router.post("/dashboard/pcs-facilities", async (req, res) => {
     res.send("Couldn't save data");
   }
 });
+
 module.exports = router;

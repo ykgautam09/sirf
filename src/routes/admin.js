@@ -409,7 +409,7 @@ router.get("/ranking/:course/:year", async (req, res) => {
   else
     ranks = await InstituteRank.findAll({ order: ["rank"], where: { year } });
   // const ranks = await InstituteRank.findAll({ order: ["rank"] ,include:[Institute]},);
-
+  console.log("ranks ", ranks);
   let names = [];
   for (let i = 0; i < ranks.length; i++) {
     let name = await Institute.findOne({
@@ -423,4 +423,5 @@ router.get("/ranking/:course/:year", async (req, res) => {
   // console.log(names);
   return res.render("Home/ranking_table", { ranks: ranks, names: names });
 });
+
 module.exports = router;

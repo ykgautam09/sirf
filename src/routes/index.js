@@ -21,11 +21,6 @@ router.get("/parameter", (req, res) => {
   res.render("Home/parameter");
 });
 
-// ranking page
-router.get("/ranking", (req, res) => {
-  res.render("Home/ranking");
-});
-
 // notification/advt page
 router.get("/notification", (req, res) => {
   res.render("Home/notification");

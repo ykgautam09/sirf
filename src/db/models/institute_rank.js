@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      institute_rank.hasOne(models.Institute, {
+        sourceKey: "institute_id",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        foreignKey: "id"
+      });
     }
   }
   institute_rank.init(
