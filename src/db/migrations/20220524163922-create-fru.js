@@ -1,36 +1,42 @@
 "use strict";
 module.exports = {
-  async up(queryInterface, DataTypes) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable("frus", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
-      },
-      bc: {
-        type: DataTypes.INTEGER
-      },
-      bo: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       year: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
       },
       institute_id: {
-        type: DataTypes.INTEGER
+        type: Sequelize.INTEGER
+      },
+      f: {
+        type: Sequelize.INTEGER
+      },
+      fru: {
+        type: Sequelize.INTEGER
+      },
+      bc: {
+        type: Sequelize.INTEGER
+      },
+      bo: {
+        type: Sequelize.INTEGER
       },
       created_at: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       },
       updated_at: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: Sequelize.DATE
       }
     });
   },
-  async down(queryInterface, DataTypes) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("frus");
   }
 };

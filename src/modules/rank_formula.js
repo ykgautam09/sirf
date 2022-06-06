@@ -81,6 +81,7 @@ function FSRfunction(section, F, N, NP) {
       }
       break;
     default:
+      FSR = 0;
       break;
   }
   return FSR;
@@ -105,8 +106,7 @@ function FQE(FRA, F1, F2, F3) {
 // function for Financial Resources and their Utilization
 
 function FRUfunction(BC, BO) {
-  var FRU = 7.5 * BC + 22.5 * BO; // f was used here in the sheet
-  return FRU;
+  return 7.5 * BC + 22.5 * BO; // f was used here in the sheet
 }
 
 // function for Combined metric for Publications
@@ -140,6 +140,7 @@ function PUfunction(section, FRQ, P) {
       PU = (35 * P) / FRQ;
       break;
     default:
+      PU = 0;
       break;
   }
   return PU;
@@ -178,6 +179,7 @@ function QPfunction(section, P, CC) {
       QP = (35 * CC) / P;
       break;
     default:
+      QP = 0;
       break;
   }
   return QP;
@@ -191,22 +193,24 @@ function IPRfunction(section, PG, PP) {
 
   switch (section) {
     case "engineering":
-      IPG = 10 * f(PG);
-      IPP = 5 * f(PP);
+      IPG = 10 * ff(PG);
+      IPP = 5 * ff(PP);
       break;
     case "pharmacy":
-      IPG = 10 * f(PG);
-      IPP = 5 * f(PP);
+      IPG = 10 * ff(PG);
+      IPP = 5 * ff(PP);
       break;
     case "medical":
-      IPG = 5 * f(PG);
-      IPP = 5 * f(PP);
+      IPG = 5 * ff(PG);
+      IPP = 5 * ff(PP);
       break;
     case "overall":
-      IPG = 10 * f(PG);
-      IPP = 5 * f(PP);
+      IPG = 10 * ff(PG);
+      IPP = 5 * ff(PP);
       break;
     default:
+      IPG = 0;
+      IPP = 0;
       break;
   }
   IPR = IPG + IPP;
@@ -220,47 +224,50 @@ function FPPPfunction(section, CF, EP, RF, PBD = 0) {
   let FPR, FPC, FPPP, FBD, EDPMDP;
   switch (section) {
     case "architecture":
-      FPR = 10 * f(RF);
-      FPC = 10 * f(CF);
+      FPR = 10 * ff(RF);
+      FPC = 10 * ff(CF);
       FPPP = FPR + FPC;
       break;
     case "management":
-      FPR = 5 * f(RF);
-      FPC = 5 * f(CF);
+      FPR = 5 * ff(RF);
+      FPC = 5 * ff(CF);
       EDPMDP = 10 * f(EP);
       FPPP = FPR + FPC + EDPMDP;
       break;
     case "overall":
-      FPR = 5 * f(RF);
-      FPC = 5 * f(CF);
-      EDPMDP = 5 * f(EP);
+      FPR = 5 * ff(RF);
+      FPC = 5 * ff(CF);
+      EDPMDP = 5 * ff(EP);
       FPPP = FPR + FPC + EDPMDP;
       break;
     case "engineering":
-      FPR = 7.5 * f(RF);
-      FPC = 7.5 * f(CF);
+      FPR = 7.5 * ff(RF);
+      FPC = 7.5 * ff(CF);
       FPPP = FPR + FPC;
       break;
     case "pharmacy":
-      FPR = 7.5 * f(RF);
-      FPC = 7.5 * f(CF);
+      FPR = 7.5 * ff(RF);
+      FPC = 7.5 * ff(CF);
       FPPP = FPR + FPC;
       break;
     case "medical":
-      FPR = 5 * f(RF);
-      FBD = 5 * f(PBD);
+      FPR = 5 * ff(RF);
+      FBD = 5 * ff(PBD);
       FPPP = FPR + FBD;
 
       break;
 
     case "law":
-      FPR = 10 * f(RF);
-      FPC = 10 * f(CF);
+      FPR = 10 * ff(RF);
+      FPC = 10 * ff(CF);
       FPPP = FPR + FPC;
 
       break;
 
     default:
+      FPR = 0;
+      FPC = 0;
+      FPPP = 0;
       break;
   }
   return { FPR, FPC, FPPP };
@@ -270,7 +277,7 @@ function FPPPfunction(section, CF, EP, RF, PBD = 0) {
 // parameters required
 function GPHfunction(section, Nhs, Np) {
   section = section.toLowerCase();
-  let GPH;
+  let GPH = 0;
   if (section == "medical") GPH = 30 * (Np / 100 + Nhs / 100);
   else {
     if (section == "overall") console.log("Not applicable");
@@ -282,9 +289,9 @@ function GPHfunction(section, Nhs, Np) {
 
 // function for Metric for University Examinations (GUE)
 //parameters required
-function GUEfunction(section, P, CC, Ng) {
+function GUEfunction(section, Ng) {
   section = section.toLowerCase();
-  let GUE, QP;
+  let GUE;
 
   switch (section) {
     case "architecture":
@@ -305,27 +312,60 @@ function GUEfunction(section, P, CC, Ng) {
     case "medical":
       GUE = 30 * Math.min(Ng / 80, 1);
       break;
-    case "college":
-      QP = (30 * CC) / P;
-      break;
     case "overall":
       GUE = 60 * Math.min(Ng / 80, 1);
       break;
     default:
+      GUE = 0;
       break;
   }
   return GUE;
 }
 
+// function for Metric for University Examinations (GPHD)
+//parameters required
+function GPHDfunction(section, NPHD) {
+  section = section.toLowerCase();
+  let GPHD;
+
+  switch (section) {
+    case "architecture":
+      GPHD = 0;
+      break;
+    case "management":
+      GPHD = 0;
+      break;
+    case "engineering":
+      GPHD = 20 * ff(NPHD);
+      break;
+    case "pharmacy":
+      GPHD = 20 * ff(NPHD);
+      break;
+    case "law":
+      GPHD = 20 * ff(NPHD);
+      break;
+    case "medical":
+      GPHD = 30 * ff(NPHD);
+      break;
+    case "overall":
+      GPHD = 40 * ff(NPHD);
+      break;
+    default:
+      GPHD = 0;
+      break;
+  }
+  return GPHD;
+}
+
 function ff(a) {
-  return a / 100000;
+  return a / (a * 10);
 }
 
 // function for median salary GMS
 // f function should be checked
 function GMSfunction(section, MS) {
   section = section.toLowerCase();
-  let GMS;
+  let GMS = 0;
   switch (section) {
     case "architecture":
       GMS = 30 * ff(MS);
@@ -350,9 +390,17 @@ function GMSfunction(section, MS) {
     case "overall":
       break;
     default:
+      GMS = 0;
       break;
   }
   return GMS;
+}
+
+function RDFunction(section, os, oc) {
+  let RD;
+  if (section.toLowerCase() === "management") RD = 30 * os;
+  else RD = 25 * os + 5 * oc;
+  return RD;
 }
 
 // all the remaining function are almost same and can be implemented using the previous code
@@ -466,17 +514,8 @@ function Ranking(
       PR = 1;
 
       ranking = 0.4 * TLR + 0.15 * RPC + 0.25 * GO + 0.1 * OI + 0.1 * PR;
-      console.log("triggered");
       break;
   }
-  console.log({
-    ranking,
-    TLR,
-    RPC,
-    GO,
-    OI,
-    PR
-  });
   return {
     ranking,
     TLR,
@@ -488,7 +527,6 @@ function Ranking(
 }
 
 module.exports = {
-  f,
   SSfunction,
   FSRfunction,
   FQE,
@@ -499,7 +537,9 @@ module.exports = {
   FPPPfunction,
   GPHfunction,
   GUEfunction,
-  ff,
+  GPHDfunction,
   GMSfunction,
+  RDFunction,
+  ff,
   Ranking
 };
