@@ -195,6 +195,18 @@ router.get("/generate-rank/:code", async (req, res) => {
 
 router.get("/ranking", async (req, res) => {
   const ranks = await InstituteRank.findAll({ order: ["rank"] });
-  return res.json(ranks);
+  // const ranks = await InstituteRank.findAll({ order: ["rank"] ,include:[Institute]},);
+
+  let names = [];
+  for (let i = 0; i < ranks.length; i++) {
+    let name = await Institute.findAll({
+      where: { aktu_id: ranks[i].institute_id }
+    });
+    names.push(name[0].name);
+    // console.log(name[0].name);
+  }
+
+  // console.log(names);
+  return res.render("Home/ranking", { ranks: ranks, names: names });
 });
 module.exports = router;
