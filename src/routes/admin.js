@@ -193,4 +193,8 @@ router.get("/generate-rank/:code", async (req, res) => {
   }
 });
 
+router.get("/ranking", async (req, res) => {
+  const ranks = await InstituteRank.findAll({ order: ["rank"] });
+  return res.json(ranks);
+});
 module.exports = router;
