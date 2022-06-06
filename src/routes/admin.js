@@ -38,11 +38,21 @@ const PcsForms = db.pcs_form;
 const InstituteRank = db.institute_rank;
 
 router.get("/generate-rank/:code", async (req, res) => {
+  const transaction = await db.sequelize.transaction();
   try {
     if (req.params.code === process.env.SERVER_SECRET) {
       const year = req.query.year;
-      const institute = await Institute.findAll({});
-      let instituteId, studentStrength;
+      const institute = await Institute.findAll(); // remove banned
+      let instituteId,
+        studentStrength,
+        annualExp,
+        consultancy,
+        financial,
+        phd,
+        placement,
+        sponsor,
+        pcsForm,
+        iprForm;
       let ss, nt, ne, np;
       let f, n, fsr;
       let fra, f1, f2, f3;
@@ -50,7 +60,11 @@ router.get("/generate-rank/:code", async (req, res) => {
       let p, frq, pu;
       let cc, qp;
       let pp, pg;
-      let cf, rf;
+      let cf, rf, ep;
+      let npp, nhs, gph;
+      let ng, gue;
+      let ms, gms;
+      let nphd, gphd;
 
       // calculate score for each institute
       for (let i = 1; i < institute.length; i++) {
@@ -67,9 +81,10 @@ router.get("/generate-rank/:code", async (req, res) => {
           where: { year, institute_id: instituteId }
         });
         // consultancy
-        counsultancy = await Consultancy.findOne({
+        consultancy = await Consultancy.findOne({
           where: { year, institute_id: instituteId }
         });
+        console.log("consultancy", consultancy);
         // financial
         financial = await Financial.findOne({
           where: { year, institute_id: instituteId }
@@ -98,14 +113,20 @@ router.get("/generate-rank/:code", async (req, res) => {
         ne = studentStrength.tsn;
         np = phd.full_time_total + phd.part_time_total;
         ss = scoreFormula.SSfunction(instituteType, nt, ne, np);
-        SS.create({ ss, np, ne, np, year, institute_id: instituteId });
+        await SS.create(
+          { ss, np, ne, np, year, institute_id: instituteId },
+          { transaction }
+        );
         console.log(ss);
 
         // fsr
         f = 100; // need to fetched
         n = nt;
         fsr = scoreFormula.FSRfunction(instituteType, f, n, np);
-        FSR.create({ f, n, fsr, year, institute_id: instituteId });
+        await FSR.create(
+          { f, n, fsr, year, institute_id: instituteId },
+          { transaction }
+        );
 
         // fqe
         fra = 20; // need to fetched
@@ -113,17 +134,20 @@ router.get("/generate-rank/:code", async (req, res) => {
         f2 = 6;
         f3 = 5;
         let { FQE, FE, FQ } = scoreFormula.FQE(fra, f1, f2, f3);
-        FQEDb.create({
-          fra,
-          fqe: FQE,
-          fe: FE,
-          fq: FQ,
-          f1,
-          f2,
-          f3,
-          year,
-          institute_id: instituteId
-        });
+        await FQEDb.create(
+          {
+            fra,
+            fqe: FQE,
+            fe: FE,
+            fq: FQ,
+            f1,
+            f2,
+            f3,
+            year,
+            institute_id: instituteId
+          },
+          { transaction }
+        );
 
         // fru
         bc =
@@ -139,32 +163,144 @@ router.get("/generate-rank/:code", async (req, res) => {
             annualExp.mainte_prev +
             annualExp.mainte_second) /
           3;
-        fru = scoreFormula.FRUfunction(instituteType, bc, bo);
-        FRU.create({ bc, bo, fru, year, institute_id: instituteId });
+        fru = scoreFormula.FRUfunction(bc, bo);
+        await FRU.create(
+          { bc, bo, fru, year, institute_id: instituteId },
+          { transaction }
+        );
 
-        // // pu
-        // p = 20; // need to fetched
-        // frq = 7; // need to fetched
-        // pu = scoreFormula.PUfunction(instituteType, frq, p);
-        // PU.create({ p, frq, pu, year, institute_id: instituteId });
-        //
-        // // qp
-        // cc = 12; // need to fetched
-        // qp = scoreFormula.QPfunction(instituteType, p, cc);
-        // QP.create({ cc, qp, p, year, institute_id: instituteId });
+        // pu
+        p = 20; // need to fetched
+        frq = 7; // need to fetched
+        pu = scoreFormula.PUfunction(instituteType, frq, p);
 
-        // // ipr
-        // pp = iprForm.patent_pub_current + iprForm.patent_pub_prev + iprForm.patent_pub_second;
-        // pg = iprForm.patent_granted_current + iprForm.patent_granted_prev + iprForm.patent_granted_second;
-        // let { IPG, IPR, IPP } = scoreFormula.IPRfunction(instituteType, pg, pp);
-        // IPRDb.create({ pp, pg, ipr: IPR, ipg: IPG, ipp: IPP, year, institute_id: instituteId })
+        await PU.create(
+          { p, frq, pu, year, institute_id: instituteId },
+          { transaction }
+        );
 
-        // // fppp
-        // cf = (counsultancy.total_amt_current + counsultancy.total_amt_prev + counsultancy.total_amt_second) / 3;
-        // rf = (sponsor.total_amt_current + sponsor.total_amt_prev + sponsor.total_amt_second) / 3;
-        // ep:1200000;  // need to fetched
-        // let { FPR, FPPP, FPC } = scoreFormula.FPPPfunction(instituteType, cf, ep, rf);
-        // FPPPDb.create({ cf, rf, ep, fpr: FPR, fppp: FPPP, fpc: FPC, year, institute_id: instituteId });
+        // qp
+        cc = 12; // need to fetched
+        qp = scoreFormula.QPfunction(instituteType, p, cc);
+        await QP.create(
+          { cc, qp, p, year, institute_id: instituteId },
+          { transaction }
+        );
+
+        // ipr
+        pp =
+          iprForm.patent_pub_current +
+          iprForm.patent_pub_prev +
+          iprForm.patent_pub_second;
+        pg =
+          iprForm.patent_granted_current +
+          iprForm.patent_granted_prev +
+          iprForm.patent_granted_second;
+        let { IPG, IPR, IPP } = scoreFormula.IPRfunction(instituteType, pg, pp);
+        await IPRDb.create(
+          {
+            pp,
+            pg,
+            ipr: IPR,
+            ipg: IPG,
+            ipp: IPP,
+            year,
+            institute_id: instituteId
+          },
+          { transaction }
+        );
+
+        // fppp
+        cf =
+          (consultancy.total_amt_current +
+            consultancy.total_amt_prev +
+            consultancy.total_amt_second) /
+          3;
+        rf =
+          (sponsor.total_amt_current +
+            sponsor.total_amt_prev +
+            sponsor.total_amt_second) /
+          3;
+        ep = 1200000; // need to fetched
+        let { FPR, FPPP, FPC } = scoreFormula.FPPPfunction(
+          instituteType,
+          cf,
+          ep,
+          rf
+        );
+        await FPPPDb.create(
+          {
+            cf,
+            rf,
+            ep,
+            fpr: FPR,
+            fppp: FPPP,
+            fpc: FPC,
+            year,
+            institute_id: instituteId
+          },
+          { transaction }
+        );
+
+        // GPH
+        npp = placement.placed_total;
+        nhs = placement.high_studies_total;
+        gph = scoreFormula.GPHfunction(instituteType, nhs, npp);
+        await GPH.create(
+          {
+            np: npp,
+            gph,
+            nhs,
+            year,
+            institute_id: instituteId
+          },
+          { transaction }
+        );
+
+        // GUE
+        ng = (nt * 100) / (nt + np);
+        gue = scoreFormula.GUEfunction(instituteType, ng);
+        await GUE.create(
+          {
+            ng,
+            gue,
+            year,
+            institute_id: instituteId
+          },
+          { transaction }
+        );
+
+        // GMS
+        ms = placement.med_salary;
+        gms = scoreFormula.GMSfunction(instituteType, ms);
+        await GMS.create(
+          {
+            ms,
+            gms,
+            year,
+            institute_id: instituteId
+          },
+          { transaction }
+        );
+
+        // GPHD
+        nphd =
+          phd.part_time_total_prev +
+          phd.part_time_total_current +
+          phd.part_time_total_second +
+          phd.full_time_total_prev +
+          phd.full_time_total_current +
+          phd.full_time_total_second;
+        gphd = scoreFormula.GPHDfunction(instituteType, nphd);
+        await GPHD.create(
+          {
+            nphd,
+            gphd,
+            year,
+            institute_id: instituteId
+          },
+          { transaction }
+        );
 
         // final rank
         let { GO, OI, PR, TLR, ranking, RPC } = scoreFormula.Ranking(
@@ -172,23 +308,36 @@ router.get("/generate-rank/:code", async (req, res) => {
           ss,
           fsr,
           FQE,
-          fru
+          fru,
+          pu,
+          qp,
+          IPR,
+          FPPP,
+          gph,
+          gue,
+          gms,
+          gphd
         );
-        InstituteRank.create({
-          go: GO,
-          oi: OI,
-          pr: PR,
-          tlr: TLR,
-          rank: ranking,
-          rpc: RPC,
-          year,
-          institute_id: instituteId
-        });
+        await InstituteRank.create(
+          {
+            go: GO,
+            oi: OI,
+            pr: PR,
+            tlr: TLR,
+            rank: ranking,
+            rpc: RPC,
+            year,
+            institute_id: instituteId
+          },
+          { transaction }
+        );
       }
+      await transaction.commit();
       return res.send("ranking generation started...");
     } else throw new Error("you are not authorized to generate ranks");
   } catch (err) {
     console.log(err);
+    transaction.revert();
     return res.send("you are not authorized to generate ranks");
   }
 });
@@ -199,10 +348,11 @@ router.get("/ranking", async (req, res) => {
 
   let names = [];
   for (let i = 0; i < ranks.length; i++) {
-    let name = await Institute.findAll({
-      where: { aktu_id: ranks[i].institute_id }
+    let name = await Institute.findOne({
+      where: { id: ranks[i].institute_id }
     });
-    names.push(name[0].name);
+    console.log(name);
+    names.push(name.name);
     // console.log(name[0].name);
   }
 
