@@ -1,71 +1,65 @@
-
 <style>
+  .container-sm {
+    background: #fff;
+    margin-top: 4%;
+    border-radius: 6px;
+    padding: 2%;
+  }
 
-  .container-sm{
-      background: #fff;
-      margin-top: 4%;
-      border-radius: 6px;
-      padding: 2%;
+  .box p {
+    text-align: justify;
+    color: #484848;
+    font-size: .9rem;
+    font-family: 'OpenSansRegular', Arial, Helvetica, sans-serif
   }
-  .box p{
-      text-align: justify;
-      color: #484848;
-      font-size: .9rem;
-      font-family: 'OpenSansRegular',Arial,Helvetica,sans-serif
-  }
+
   table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
   }
 
-  td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
   }
 
   tr:nth-child(even) {
-      background-color: #dddddd;
+    background-color: #dddddd;
   }
-  </style>
-  <%- include("./_header.ejs") -%>
-  
-      <img src="/public/home/image/about-inner-banner.jpg" style="width: 100%;
+</style>
+<%- include("./_header.ejs") -%>
+
+  <img src="/public/home/image/about-inner-banner.jpg" style="width: 100%;
     height: auto;">
-   
-      <div class="container-sm">
-        <h2>College_Name Ranking</h2>
-        <table>
+
+  <div class="container-sm">
+    <h2>College_Name Ranking</h2>
+    <table>
+
+      <tr>
+        <th>Rank</th>
+        <th>AKTU ID</th>
+        <th>Institute Name</th>
+      </tr>
+      <% for(let i=1;i<=ranks.length;i++){ %>
         <tr>
-          <th>College</th>
-          <th>Rank</th>
+          <td>
+            <%= i %>
+          </td>
+          <td>
+            <%= ranks[i-1].institute_id %>
+          </td>
+          <td>
+            <%= names[i-1] %>
+          </td>
+
         </tr>
-        <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-        </tr>
-        <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>Francisco Chang</td>
-        </tr>
-        <tr>
-          <td>Ernst Handel</td>
-          <td>Roland Mendel</td>
-        </tr>
-        <tr>
-          <td>Island Trading</td>
-          <td>Helen Bennett</td>
-        </tr>
-        <tr>
-          <td>Laughing Bacchus Winecellars</td>
-          <td>Yoshi Tannamuri</td>
-        </tr>
-        <tr>
-          <td>Magazzini Alimentari Riuniti</td>
-          <td>Giovanni Rovelli</td>
-        </tr>
-      </table>
-        </div>
-        
+
+        <%} %>
+    </table>
+  </div>
+
   <%- include("./_footer.ejs") -%>
