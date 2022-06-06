@@ -16,11 +16,10 @@ const Phd = db.phd;
 const Financial = db.financial;
 const Annual = db.annual_exp;
 const Ipr = db.ipr;
-const Iprforms = db.ipr_form;
+const Iprform = db.ipr_form;
 const Sponsor = db.spon;
 const Consultancy = db.consult;
-const Pcs = db.pc;
-const Pcsforms = db.pcs_form;
+const Pcsform = db.pcs_form;
 
 // accept user data from register page
 router.post(
@@ -34,6 +33,7 @@ router.post(
         name: req.body.collegeName,
         email: req.body.collegeEmail,
         type: req.body.collegeType,
+        course: req.body.course,
         certificate: req.file.filename
       };
       console.log(userData, ")))___");
@@ -369,7 +369,7 @@ router.get("/dashboard", async (req, res) => {
     const annualData = await Annual.findOne({
       where: { institute_id: "123456" }
     });
-    const iprData = await Iprforms.findOne({
+    const iprData = await Iprform.findOne({
       where: { institute_id: "123456" }
     });
     const sponData = await Sponsor.findOne({
@@ -378,7 +378,7 @@ router.get("/dashboard", async (req, res) => {
     const consData = await Consultancy.findOne({
       where: { institute_id: "123456" }
     });
-    const psData = await Pcsforms.findOne({
+    const psData = await Pcsform.findOne({
       where: { institute_id: "123456" }
     });
     res.render("College/dashboard", {
@@ -619,7 +619,7 @@ router.post("/dashboard/ipr-details", async (req, res) => {
       course: req.params.course,
       institute_id: institute.id
     };
-    const ipr = await Ipr.create(iprData);
+    const ipr = await Iprform.create(iprData);
     if (!ipr) throw new Error("can't save");
     console.log(ipr);
     return res.json(ipr);
@@ -656,9 +656,9 @@ router.post("/dashboard/sponsored-research", async (req, res) => {
       total_amt_prev: parseInt(req.body.amtRPrev2),
       total_amt_second: parseInt(req.body.amtRPrev3),
 
-      total_amt_rec_current: parseInt(req.body.amtWPrev1),
-      total_amt_rec_prev: parseInt(req.body.amtWPrev2),
-      total_amt_rec_second: parseInt(req.body.amtWPrev3),
+      total_amt_rec_current: req.body.amtWPrev1,
+      total_amt_rec_prev: req.body.amtWPrev2,
+      total_amt_rec_second: req.body.amtWPrev3,
 
       course: req.params.course,
       institute_id: institute.id
@@ -700,9 +700,9 @@ router.post("/dashboard/consultancy-project", async (req, res) => {
       total_amt_prev: parseInt(req.body.amtRPrev2),
       total_amt_second: parseInt(req.body.amtRPrev3),
 
-      total_amt_rec_current: parseInt(req.body.amtWPrev1),
-      total_amt_rec_prev: parseInt(req.body.amtWPrev2),
-      total_amt_rec_second: parseInt(req.body.amtWPrev3),
+      total_amt_rec_current: req.body.amtWPrev,
+      total_amt_rec_prev: req.body.amtWPrev2,
+      total_amt_rec_second: req.body.amtWPrev3,
 
       course: req.params.course,
       institute_id: institute.id
@@ -744,7 +744,7 @@ router.post("/dashboard/pcs-facilities", async (req, res) => {
       course: req.params.course,
       institute_id: institute.id
     };
-    const pcs = await Pcs.create(pcsData);
+    const pcs = await Pcsform.create(pcsData);
     if (!pcs) throw new Error("can't save");
     console.log(pcs);
     return res.json(pcs);
@@ -753,15 +753,5 @@ router.post("/dashboard/pcs-facilities", async (req, res) => {
     res.send("Couldn't save data");
   }
 });
-router.post("/dashboard/get-id", async (req, res) => {
-  try {
-    let email = req.body.email;
-    let id = await Institute.findOne({ where: { email: email } });
-    console.log("hello ", id.aktu_id);
-    return res.json(id);
-  } catch (err) {
-    console.log("data could not be saved", err);
-    res.send("Couldn't save data");
-  }
-});
+
 module.exports = router;
