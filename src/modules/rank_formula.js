@@ -396,6 +396,13 @@ function GMSfunction(section, MS) {
   return GMS;
 }
 
+function RDFunction(section, os, oc) {
+  let RD;
+  if (section.toLowerCase() === "management") RD = 30 * os;
+  else RD = 25 * os + 5 * oc;
+  return RD;
+}
+
 // all the remaining function are almost same and can be implemented using the previous code
 // calculating rank here
 function Ranking(
@@ -532,5 +539,7 @@ module.exports = {
   GUEfunction,
   GPHDfunction,
   GMSfunction,
+  RDFunction,
+  ff,
   Ranking
 };

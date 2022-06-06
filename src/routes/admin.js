@@ -7,6 +7,7 @@ const { sendMail } = require("../services/mail");
 const scoreFormula = require("./../modules/rank_formula");
 
 const db = require("./../db/models/index");
+const { ff } = require("../modules/rank_formula");
 const SS = db.ss;
 const FSR = db.fsr;
 const FQEDb = db.fqe;
@@ -65,6 +66,10 @@ router.get("/generate-rank/:code", async (req, res) => {
       let ng, gue;
       let ms, gms;
       let nphd, gphd;
+      let os, oc, rd;
+      let nws, nwf, wd;
+      let nesc, escs;
+      let pcs;
 
       // calculate score for each institute
       for (let i = 1; i < institute.length; i++) {
@@ -302,6 +307,42 @@ router.get("/generate-rank/:code", async (req, res) => {
           { transaction }
         );
 
+        // RD
+        os = studentStrength.out_state_mf / nt;
+        oc = studentStrength.out_country_mf / nt;
+        rd = scoreFormula.RDFunction(instituteType, os, oc);
+        await RD.create({
+          rd,
+          os,
+          oc,
+          year,
+          institute_id: instituteId
+        });
+
+        // WD
+        nws = (studentStrength.fsn * 100) / nt;
+        nwf = 15; // need to fetched
+        wd = 15 * (nws / 50) + 15 * (nwf / 20);
+        await WD.create({
+          wd,
+          nws,
+          nwf,
+          year,
+          institute_id: instituteId
+        });
+
+        // ESCS
+        nesc = (studentStrength.tution_fee_reimburse_institute * 100) / nt;
+        escs = 20 * ff(nesc);
+        await WD.create({
+          nesc,
+          escs,
+          institute_id: instituteId
+        });
+
+        // PCS
+        pcs = 20; // need to fetched
+
         // final rank
         let { GO, OI, PR, TLR, ranking, RPC } = scoreFormula.Ranking(
           instituteType,
@@ -316,7 +357,13 @@ router.get("/generate-rank/:code", async (req, res) => {
           gph,
           gue,
           gms,
-          gphd
+          gphd,
+          (gss = 0),
+          rd,
+          wd,
+          escs,
+          pcs,
+          (pr = 1)
         );
         await InstituteRank.create(
           {
