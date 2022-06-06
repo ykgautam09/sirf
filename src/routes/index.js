@@ -46,6 +46,11 @@ router.get("/advertisement", (req, res) => {
   res.render("Home/advertisement");
 });
 
+// advertisement page
+router.get("/rank", (req, res) => {
+  res.render("Home/ranking");
+});
+
 // error page
 router.get("/error", (req, res) => {
   res.render("Home/error");

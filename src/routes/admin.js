@@ -8,6 +8,7 @@ const scoreFormula = require("./../modules/rank_formula");
 
 const db = require("./../db/models/index");
 const { ff } = require("../modules/rank_formula");
+const { getYear } = require("date-fns");
 const SS = db.ss;
 const FSR = db.fsr;
 const FQEDb = db.fqe;
@@ -374,7 +375,8 @@ router.get("/generate-rank/:code", async (req, res) => {
             rank: ranking,
             rpc: RPC,
             year,
-            institute_id: instituteId
+            institute_id: instituteId,
+            category: instituteType.toLowerCase()
           },
           { transaction }
         );
@@ -389,8 +391,23 @@ router.get("/generate-rank/:code", async (req, res) => {
   }
 });
 
-router.get("/ranking", async (req, res) => {
-  const ranks = await InstituteRank.findAll({ order: ["rank"] });
+router.get("/ranking/:course/:year", async (req, res) => {
+  let year = req.params.year | getYear(Date.now()),
+    course = req.params.course;
+  let ranks;
+  if (
+    course == "law" ||
+    course == "management" ||
+    course == "engineering" ||
+    course == "pharmacy" ||
+    course == "architecture"
+  )
+    ranks = await InstituteRank.findAll({
+      order: ["rank"],
+      where: { year, category: course }
+    });
+  else
+    ranks = await InstituteRank.findAll({ order: ["rank"], where: { year } });
   // const ranks = await InstituteRank.findAll({ order: ["rank"] ,include:[Institute]},);
 
   let names = [];
@@ -404,6 +421,6 @@ router.get("/ranking", async (req, res) => {
   }
 
   // console.log(names);
-  return res.render("Home/ranking", { ranks: ranks, names: names });
+  return res.render("Home/ranking_table", { ranks: ranks, names: names });
 });
 module.exports = router;
