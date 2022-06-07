@@ -73,7 +73,7 @@ router.get("/generate-rank/:code", async (req, res) => {
       let pcs;
 
       // calculate score for each institute
-      for (let i = 1; i < institute.length; i++) {
+      for (let i = 0; i < institute.length; i++) {
         instituteId = institute[i].id;
         instituteType = institute[i].course;
         console.log(instituteId, instituteType);
@@ -386,7 +386,7 @@ router.get("/generate-rank/:code", async (req, res) => {
     } else throw new Error("you are not authorized to generate ranks");
   } catch (err) {
     console.log(err);
-    transaction.revert();
+    transaction.rollback();
     return res.send("you are not authorized to generate ranks");
   }
 });
@@ -416,7 +416,7 @@ router.get("/ranking/:course/:year", async (req, res) => {
       where: { id: ranks[i].institute_id }
     });
     console.log(name);
-    names.push(name.name);
+    names.push({ name: name.name, aktu_id: name.aktu_id });
     // console.log(name[0].name);
   }
 
