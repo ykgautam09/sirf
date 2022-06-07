@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ejs = require("ejs");
 const path = require("path");
-const { addMinutes } = require("date-fns");
+const { addMinutes, getYear } = require("date-fns");
 const upload = require("../services/upload");
 const cred = require("../modules/credential");
 const { sendMail } = require("../services/mail");
@@ -33,7 +33,7 @@ router.post(
         name: req.body.collegeName,
         email: req.body.collegeEmail,
         type: req.body.collegeType,
-        course: req.body.course,
+        course: req.body.course.toLowerCase(),
         certificate: req.file.filename
       };
       console.log(userData, ")))___");
@@ -200,10 +200,7 @@ router.post("/login", async (req, res) => {
         });
     } else throw new Error("password doesn't match");
 
-    return res.render("College/dashboard", {
-      instituteId: institute.aktu_id,
-      instituteName: "KNNNI"
-    });
+    return res.redirect("dashboard");
   } catch (err) {
     console.log("something goes wrong", err);
     res.send("Credentials Doesn't Matched!");
@@ -335,51 +332,52 @@ router.get("/register", (req, res) => {
 // dashboard
 router.get("/dashboard", async (req, res) => {
   try {
+    const manual = "3";
     const sug4 = await StudentStrngth.findOne({
-      where: { institute_id: "123456", course: "ug4" }
+      where: { institute_id: manual, course: "ug4" }
     });
     const sug5 = await StudentStrngth.findOne({
-      where: { institute_id: "123456", course: "ug5" }
+      where: { institute_id: manual, course: "ug5" }
     });
     const spg2 = await StudentStrngth.findOne({
-      where: { institute_id: "123456", course: "pg2" }
+      where: { institute_id: manual, course: "pg2" }
     });
     const spgin = await StudentStrngth.findOne({
-      where: { institute_id: "123456", course: "pgIntegrated" }
+      where: { institute_id: manual, course: "pgIntegrated" }
     });
     const pug4 = await Placement.findOne({
-      where: { institute_id: "123456", course: "ug4" }
+      where: { institute_id: manual, course: "ug4" }
     });
     const pug5 = await Placement.findOne({
-      where: { institute_id: "123456", course: "ug5" }
+      where: { institute_id: manual, course: "ug5" }
     });
     const ppg2 = await Placement.findOne({
-      where: { institute_id: "123456", course: "pg2" }
+      where: { institute_id: manual, course: "pg2" }
     });
     const ppgin = await Placement.findOne({
-      where: { institute_id: "123456", course: "pgIntegrated" }
+      where: { institute_id: manual, course: "pgIntegrated" }
     });
     console.log("hello sug4 new", sug4);
     const phdData = await Phd.findOne({
-      where: { institute_id: "123456" }
+      where: { institute_id: manual }
     });
     const financialData = await Financial.findOne({
-      where: { institute_id: "123456" }
+      where: { institute_id: manual }
     });
     const annualData = await Annual.findOne({
-      where: { institute_id: "123456" }
+      where: { institute_id: manual }
     });
     const iprData = await Iprform.findOne({
-      where: { institute_id: "123456" }
+      where: { institute_id: manual }
     });
     const sponData = await Sponsor.findOne({
-      where: { institute_id: "123456" }
+      where: { institute_id: manual }
     });
     const consData = await Consultancy.findOne({
-      where: { institute_id: "123456" }
+      where: { institute_id: manual }
     });
     const psData = await Pcsform.findOne({
-      where: { institute_id: "123456" }
+      where: { institute_id: manual }
     });
     res.render("College/dashboard", {
       instituteId: "123456",
@@ -433,6 +431,7 @@ router.post("/dashboard/student-strength/:course", async (req, res) => {
       tution_fee_reimburse_private: parseFloat(req.body.feePrivate),
       no_tution_fee_reimburse: parseFloat(req.body.notFee),
       course: req.params.course,
+      year: getYear(Date.now()),
       institute_id: institute.id
     };
     const studentStrength = await StudentStrngth.create(studentStrengthData);
@@ -468,6 +467,7 @@ router.post("/dashboard/placement/:course", async (req, res) => {
       med_salary: parseInt(req.body.medianSalary),
       high_studies_total: parseInt(req.body.higherStudies),
       course: req.params.course,
+      year: getYear(Date.now()),
       institute_id: institute.id
     };
     console.log("hello ", placementData);
@@ -506,6 +506,7 @@ router.post("/dashboard/phd-student-details", async (req, res) => {
       full_time_total_prev: parseInt(req.body.fullTimePrev2),
       full_time_total_second: parseInt(req.body.fullTimePrev3),
       course: req.params.course,
+      year: getYear(Date.now()),
       institute_id: institute.id
     };
     console.log("hello ", phdData);
@@ -545,7 +546,8 @@ router.post("/dashboard/financial-resources", async (req, res) => {
       other_exp_prev: parseInt(req.body.otherPrev2),
       other_exp_second: parseInt(req.body.otherPrev3),
       course: req.params.course,
-      institute_id: institute.id
+      institute_id: institute.id,
+      year: getYear(Date.now())
     };
     console.log("hello ", frData);
     const fr = await Financial.create(frData);
@@ -580,7 +582,8 @@ router.post("/dashboard/annual-expenditure", async (req, res) => {
       seminar_prev: parseInt(req.body.seminarsPrev2),
       seminar_second: parseInt(req.body.seminarsPrev3),
       course: req.params.course,
-      institute_id: institute.id
+      institute_id: institute.id,
+      year: getYear(Date.now())
     };
     console.log("hello ", annualExpData);
     const annual_ex = await Annual.create(annualExpData);
@@ -617,7 +620,8 @@ router.post("/dashboard/ipr-details", async (req, res) => {
       patent_granted_prev: parseInt(req.body.patentsGrantedPrev1),
       patent_granted_second: parseInt(req.body.patentsGrantedPrev1),
       course: req.params.course,
-      institute_id: institute.id
+      institute_id: institute.id,
+      year: getYear(Date.now())
     };
     const ipr = await Iprform.create(iprData);
     if (!ipr) throw new Error("can't save");
@@ -659,7 +663,7 @@ router.post("/dashboard/sponsored-research", async (req, res) => {
       total_amt_rec_current: req.body.amtWPrev1,
       total_amt_rec_prev: req.body.amtWPrev2,
       total_amt_rec_second: req.body.amtWPrev3,
-
+      year: getYear(Date.now()),
       course: req.params.course,
       institute_id: institute.id
     };
@@ -699,7 +703,7 @@ router.post("/dashboard/consultancy-project", async (req, res) => {
       total_amt_current: parseInt(req.body.amtRPrev1),
       total_amt_prev: parseInt(req.body.amtRPrev2),
       total_amt_second: parseInt(req.body.amtRPrev3),
-
+      year: getYear(Date.now()),
       total_amt_rec_current: req.body.amtWPrev1,
       total_amt_rec_prev: req.body.amtWPrev2,
       total_amt_rec_second: req.body.amtWPrev3,
@@ -740,7 +744,7 @@ router.post("/dashboard/pcs-facilities", async (req, res) => {
       toilets_current: parseInt(req.body.toiletsPrev1),
       toilets_prev: parseInt(req.body.toiletsPrev2),
       toilets_second: parseInt(req.body.toiletsPrev3),
-
+      year: getYear(Date.now()),
       course: req.params.course,
       institute_id: institute.id
     };
